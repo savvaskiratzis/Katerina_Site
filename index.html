@@ -43,12 +43,15 @@
   <meta property="og:title" content="Κατερίνα Τσίγα - Λογοθεραπεύτρια | Λογοθεραπεία κατ' οίκον, Γλυφάδα">
   <meta property="og:description" content="Λογοθεραπεία κατ' οίκον σε παιδιά και ενήλικες στα Νότια Προάστια της Αττικής. Από το 2013, απόφοιτος Queen Margaret University of Edinburgh.">
   <meta property="og:url" content="https://tsigalogo.gr/">
-  <meta property="og:image" content="https://tsigalogo.gr/images/katerina-tsiga.jpg">
-  <meta property="og:image:alt" content="Κατερίνα Τσίγα - Λογοθεραπεύτρια">
+  <meta property="og:image" content="https://tsigalogo.gr/images/og-tsigalogo-1200x630.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Κατερίνα Τσίγα — Λογοθεραπεύτρια, λογοθεραπεία κατ' οίκον στα Νότια Προάστια Αττικής">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Κατερίνα Τσίγα - Λογοθεραπεύτρια | Λογοθεραπεία κατ' οίκον">
   <meta name="twitter:description" content="Λογοθεραπεία κατ' οίκον σε παιδιά και ενήλικες στα Νότια Προάστια της Αττικής.">
-  <meta name="twitter:image" content="https://tsigalogo.gr/images/katerina-tsiga.jpg">
+  <meta name="twitter:image" content="https://tsigalogo.gr/images/og-tsigalogo-1200x630.jpg">
   <!-- Webfonts are self-hosted; the @font-face rules live at the top of style.css.
        Not preloaded on purpose: measured, 60 KB of font at high priority pushes
        the still-render-blocking Font Awesome stylesheet later and makes FCP
@@ -60,13 +63,13 @@
        with the fonts trimmed to the 29 glyphs — 96% less CSS and 98% less font
        bytes, outlines untouched so rendering is identical.
        Regenerate after adding an icon, then re-run the pixel gate. -->
-  <link rel="stylesheet" href="vendor/font-awesome/6.5.1/subset/fa-subset.css">
-  <link rel="stylesheet" href="css/style.css?v=a6322f65">
+  <link rel="stylesheet" href="vendor/font-awesome/6.5.1/subset/fa-subset.css?v=796f26e2">
+  <link rel="stylesheet" href="css/style.css?v=7473fd48">
   <!-- The welcome screen's own stylesheet: separate so this large, self-contained feature
        can be edited without touching the 1,700-line site sheet. tools/version-assets.py
        rewrites BOTH ?v= tokens from the files' content hashes — a stale token means
        returning visitors keep a year-old cached copy (see _headers). -->
-  <link rel="stylesheet" href="css/welcome.css?v=562d5c1d">
+  <link rel="stylesheet" href="css/welcome.css?v=911f652b">
   <!-- Favicon: raster αρχεία στο root με URL — ΟΧΙ data: URI. Η Google δεν κατεβάζει ποτέ
        data: URIs, και το SVG δεν είναι υποστηριζόμενη μορφή για το SERP, οπότε το παλιό
        inline SVG+emoji 🎤 άφηνε την προεπιλεγμένη υδρόγειο δίπλα στο domain στο Google
@@ -92,7 +95,13 @@
     "url": "https://tsigalogo.gr/",
     "telephone": "+306937524966",
     "email": "tsiga.kat@gmail.com",
-    "image": "https://tsigalogo.gr/images/katerina-tsiga.jpg",
+    "image": "https://tsigalogo.gr/images/og-tsigalogo-1200x630.jpg",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tsigalogo.gr/images/logo-kt-512.png",
+      "width": 512,
+      "height": 512
+    },
     "priceRange": "€€",
     "foundingDate": "2013",
     "founder": { "@type": "Person", "name": "Κατερίνα Τσίγα", "jobTitle": "Λογοθεραπεύτρια" },
@@ -106,7 +115,8 @@
     },
     "areaServed": [
       { "@type": "City", "name": "Γλυφάδα" },
-      { "@type": "City", "name": "Ελληνικό-Αργυρούπολη" },
+      { "@type": "City", "name": "Ελληνικό" },
+      { "@type": "City", "name": "Αργυρούπολη" },
       { "@type": "City", "name": "Βούλα" },
       { "@type": "City", "name": "Βάρη" },
       { "@type": "City", "name": "Βουλιαγμένη" },
@@ -152,19 +162,16 @@
     <div class="container">
       <div class="logo">
         <a href="#">
+          <!-- Εικονίδιο λογοτύπου: σπίτι + χαμόγελο από artwork του ιδιοκτήτη (18/10/2026,
+               tools/build-logo-mark.py — διαφανές φόντο). Το «Κατερίνα Τσίγα / ΛΟΓΟΘΕΡΑΠΕΥΤΡΑ»
+               μένει ζωντανό κείμενο από δίπλα. alt με κείμενο: το Bing Webmaster Tools
+               σηματοδοτεί τα κενά alt. -->
           <div class="logo-icon">
-            <!-- Λογότυπο από εικόνα του ιδιοκτήτη (tools/extract-logo.py): κύκλος sage με δύο
-                 συννεφάκια και κυματομορφή φωνής. Εξάγεται 50px + 2x, με 2px κομμένα μέσα στον
-                 κύκλο ώστε να μη μένει κρεμ λουρίδα στην άκρη του border-radius.
-                 alt με ΚΕΙΜΕΝΟ (όχι alt=""): το Bing Webmaster Tools σηματοδοτεί κάθε κενό alt
-                 ως «Alt attribute for images is missing» στο URL Inspection (5/10/2026 — μόνο
-                 αυτή η εικόνα βρέθηκε, γιατί είναι η μόνη χωρίς alt ΚΑΙ χωρίς aria-hidden).
-                 Το κείμενο είναι ΑΥΤΟΥΣΙΟ: ίδιο string με τη φωτογραφία της ενότητας «Σχετικά». -->
             <picture>
-              <source type="image/webp" srcset="images/logo-kt-50.webp 1x, images/logo-kt-100.webp 2x">
-              <img src="images/logo-kt-50.png"
-                   srcset="images/logo-kt-50.png 1x, images/logo-kt-100.png 2x"
-                   width="50" height="50" alt="Κατερίνα Τσίγα — Λογοθεραπεύτρια" decoding="async">
+              <source type="image/webp" srcset="images/logo-kt-house-96.webp 1x, images/logo-kt-house-192.webp 2x">
+              <img src="images/logo-kt-house-96.png"
+                   srcset="images/logo-kt-house-96.png 1x, images/logo-kt-house-192.png 2x"
+                   width="96" height="89" alt="Κατερίνα Τσίγα — Λογοθεραπεύτρια" decoding="async">
             </picture>
           </div>
           <div class="logo-text">
@@ -447,9 +454,9 @@
 
       <a class="welcome-enter" href="#hero"
          aria-label="Μάθετε περισσότερα — είσοδος στο site"></a>
-      <button type="button" class="welcome-close" aria-label="Κλείσιμο">
-        <span aria-hidden="true">&times;</span>
-      </button>
+      <!-- ΧΩΡΙΣ κουμπί ×: ο ιδιοκτήτης ζήτησε (18/10/2026) να μη φαίνεται Χ πάνω δεξιά —
+           αρκεί ένα κλικ οπουδήποτε στην εικόνα (το .welcome-enter καλύπτει όλο το πλαίσιο, και
+           το ίδιο το overlay κλείνει με κλικ). Το Escape παραμένει για πληκτρολόγιο. -->
     </div>
   </div>
 
@@ -483,10 +490,10 @@
                  Η περικοπή έγινε από το τετράγωνο master με οριζόντιο παράθυρο x 119..981
                  (κεντραρισμένο, ελεγμένο οπτικά ανάμεσα σε 3 υποψήφια) — κανένα stretch. -->
             <source media="(min-width: 992px)" type="image/avif"
-                    srcset="images/katerina-tsiga-p651-550.avif 550w, images/katerina-tsiga-p651-750.avif 750w, images/katerina-tsiga-p651-1100.avif 1100w"
+                    srcset="images/katerina-tsiga-p627-550.avif 550w, images/katerina-tsiga-p627-750.avif 750w, images/katerina-tsiga-p627-1100.avif 1100w"
                     sizes="550px">
             <source media="(min-width: 992px)" type="image/webp"
-                    srcset="images/katerina-tsiga-p651-550.webp 550w, images/katerina-tsiga-p651-750.webp 750w, images/katerina-tsiga-p651-1100.webp 1100w"
+                    srcset="images/katerina-tsiga-p627-550.webp 550w, images/katerina-tsiga-p627-750.webp 750w, images/katerina-tsiga-p627-1100.webp 1100w"
                     sizes="550px">
             <source type="image/avif"
                     srcset="images/katerina-tsiga-v2-550.avif 550w, images/katerina-tsiga-v2-750.avif 750w, images/katerina-tsiga-v2-1100.avif 1100w"
@@ -494,7 +501,7 @@
             <source type="image/webp"
                     srcset="images/katerina-tsiga-v2-550.webp 550w, images/katerina-tsiga-v2-750.webp 750w, images/katerina-tsiga-v2-1100.webp 1100w"
                     sizes="(max-width: 991px) 96vw, 550px">
-            <img src="images/katerina-tsiga-p651-750.jpg" alt="Κατερίνα Τσίγα — Λογοθεραπεύτρια" class="about-photo"
+            <img src="images/katerina-tsiga-p627-750.jpg" alt="Κατερίνα Τσίγα — Λογοθεραπεύτρια" class="about-photo"
                  width="1100" height="1404" loading="lazy" decoding="async">
           </picture>
         </div>
@@ -559,6 +566,24 @@
             language and communication disorders.
           </p>
 
+        </div>
+      </div>
+
+      <!-- «Η δική μου προσέγγιση»: δικό του δίστιχο (εικονογράφηση αριστερά, κείμενο δεξιά) —
+           ζητήθηκε 18/10/2026. Η εικονογράφηση είναι full-bleed (ροζ/κρεμ διαβάθμιση σε όλο τον
+           καμβά), γι' αυτό ΔΕΝ περικόπηκε στα όρια μελάνης όπως οι άλλες δύο. Πηγές/επεξεργασία:
+           tools/build-about-inline.py. -->
+      <div class="about-grid about-grid--approach">
+        <figure class="about-art fade-in">
+          <picture>
+            <source srcset="images/tsiga-approach-session-760.webp" type="image/webp">
+            <img src="images/tsiga-approach-session-760.jpg"
+                 alt="Συνεδρία λογοθεραπείας με παιδί"
+                 width="760" height="1013" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="about-text">
+
                     <!-- ΑΟΡΑΤΟ anchor: ο στόχος των υπο-κουμπιών του «Σχετικά». Δεν είναι
                το <h3> γιατί υπάρχει σε δύο γλώσσες και το κρυμμένο αντίγραφο δεν
                έχει θέση (δεν μπορείς να scroll-άρεις σε display:none). -->
@@ -610,11 +635,26 @@
           <h3 class="lang-el">Σπουδές &amp; Επαγγελματική Εμπειρία</h3>
           <h3 class="lang-en">Education &amp; Professional Experience</h3>
 
-          <p class="lang-el">BSc in Logopaedics | Queen Margaret University – Edinburgh (United Kingdom)</p>
-          <p class="lang-en">BSc in Logopaedics | Queen Margaret University – Edinburgh (United Kingdom)</p>
+          <div class="about-pair">
+            <!-- Φωτογραφία προσώπου δίπλα στο «Σπουδές &amp; Επαγγελματική Εμπειρία» (ζητήθηκε 18/10/2026).
+               Πηγές/επεξεργασία: tools/build-about-inline.py. Το alt είναι ΤΟ ΙΔΙΟ string με την
+               κύρια φωτογραφία του About (μηδέν νέα διατύπωση). -->
+            <figure class="about-figure about-figure--round fade-in">
+              <picture>
+                <source srcset="images/katerina-tsiga-face-640.webp" type="image/webp">
+                <img src="images/katerina-tsiga-face-640.jpg" alt="Κατερίνα Τσίγα — Λογοθεραπεύτρια"
+                     width="640" height="640" loading="lazy" decoding="async">
+              </picture>
+            </figure>
+            <div>
+              <p class="lang-el">BSc in Logopaedics | Queen Margaret University – Edinburgh (United Kingdom)</p>
+              <p class="lang-en">BSc in Logopaedics | Queen Margaret University – Edinburgh (United Kingdom)</p>
 
-          <p class="lang-el">Η επαγγελματική μου πορεία περιλαμβάνει κλινική άσκηση και εμπειρία σε διαφορετικά θεραπευτικά και εκπαιδευτικά πλαίσια, μεταξύ άλλων:</p>
-          <p class="lang-en">My professional path includes clinical practice and experience in a range of therapeutic and educational settings, among others:</p>
+              <p class="lang-el">Η επαγγελματική μου πορεία περιλαμβάνει κλινική άσκηση και εμπειρία σε διαφορετικά θεραπευτικά και εκπαιδευτικά πλαίσια, μεταξύ άλλων:</p>
+              <p class="lang-en">My professional path includes clinical practice and experience in a range of therapeutic and educational settings, among others:</p>
+            </div>
+          </div>
+
           <ul class="about-list lang-el">
             <li>Ναυτικό Νοσοκομείο Αθηνών – Νευρολογική Κλινική</li>
             <li>Εθνικό Ίδρυμα Κωφών &amp; Ειδικό Δημοτικό Σχολείο Κωφών</li>
@@ -658,67 +698,203 @@
             </div>
           </div>
 
-                    <!-- ΑΟΡΑΤΟ anchor: ο στόχος των υπο-κουμπιών του «Σχετικά». Δεν είναι
-               το <h3> γιατί υπάρχει σε δύο γλώσσες και το κρυμμένο αντίγραφο δεν
-               έχει θέση (δεν μπορείς να scroll-άρεις σε display:none). -->
+        </div>
+      </div>
+
+      <!-- «Πώς δουλεύω»: ΔΙΚΟ ΤΟΥ δίστιχο (εικόνα αριστερά / κείμενο δεξιά), με την ΙΔΙΑ
+           μεταχείριση εικόνας όπως η μεγάλη φωτογραφία πιο πάνω — ζητήθηκε 18/10/2026
+           («η εικόνα στο πώς δουλεύω θέλω να είναι όπως στο “Η λογοθεραπεία για μένα ξεκινά από
+           τη σύνδεση”»). Σπάει σε δεύτερο .about-grid για να καθίσει η εικονογράφηση στην
+           αριστερή στήλη, στο ίδιο πλάτος/κάδρο με το πορτρέτο. -->
+      <div class="about-grid about-grid--how">
+        <div class="about-media">
+          <!-- ΔΥΟ εικονογραφήσεις δίπλα σε ΟΛΟ το κείμενο του «Πώς δουλεύω» (ζήτηση 18/10/2026):
+               πάνω ο «κύκλος οικογένειας» (δένει με την εισαγωγή: κάθε παιδί μοναδικό, η
+               συνεργασία ξεκινά από τις ανάγκες του) και κάτω το «αποτύπωμα αξιών» (δένει με τα
+               βήματα/στόχο: εξατομίκευση, συνεργασία, εξέλιξη, καθημερινότητα).
+               Επεξεργασία/πηγές: tools/build-about-inline.py. -->
+          <figure class="about-art fade-in">
+            <picture>
+              <source srcset="images/tsiga-family-circle-760.webp" type="image/webp">
+              <img src="images/tsiga-family-circle-760.jpg"
+                   alt="Λογοθεραπεία κατ' οίκον σε παιδιά και ενήλικες"
+                   width="760" height="755" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+          <figure class="about-art fade-in">
+            <picture>
+              <source srcset="images/tsiga-values-fingerprint-760.webp" type="image/webp">
+              <img src="images/tsiga-values-fingerprint-760.jpg"
+                   alt="Σεβασμός στη μοναδικότητα κάθε ανθρώπου"
+                   width="760" height="1107" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+        </div>
+        <div class="about-text">
+
           <span class="anchor" id="how-i-work" aria-hidden="true"></span>
           <h3 class="lang-el">Πώς δουλεύω</h3>
           <h3 class="lang-en">How I work</h3>
 
-          <h4 class="lang-el">Εξατομικευμένα θεραπευτικά πλάνα</h4>
-          <h4 class="lang-en">Personalised therapy plans</h4>
-
-          <p class="lang-el">
-            Κάθε άνθρωπος είναι διαφορετικός. Γι' αυτό και κάθε θεραπευτική παρέμβαση ξεκινά
-            από τις δικές του ανάγκες.
-          </p>
-          <p class="lang-en">
-            Every person is different. That is why every therapeutic intervention starts from
-            their own needs.
+          <p class="lang-el about-sub-lead">
+            Κάθε άνθρωπος είναι μοναδικός. Και η θεραπεία του το ίδιο.
           </p>
 
           <p class="lang-el">
-            Οι δραστηριότητες σχεδιάζονται με βάση την ηλικία, τις δυνατότητες, τα ενδιαφέροντα
-            και την καθημερινότητα του θεραπευόμενου, ώστε η θεραπεία να γίνεται κατανοητή,
-            δημιουργική και ουσιαστική.
-          </p>
-          <p class="lang-en">
-            Activities are designed around the client's age, abilities, interests and daily life,
-            so that therapy is understandable, creative and meaningful.
+            Κάθε παιδί έχει τον δικό του τρόπο να επικοινωνεί, να μαθαίνει και να εξελίσσεται.
+            Γι' αυτό, κάθε θεραπευτική συνεργασία ξεκινά από τις δικές του ανάγκες, τις
+            δυνατότητές του και τον δικό του ρυθμό.
           </p>
 
           <p class="lang-el">
-            Στόχος δεν είναι απλώς να ολοκληρωθούν κάποιες ασκήσεις.
+            Η λογοθεραπεία δεν είναι ένα έτοιμο πρόγραμμα που ταιριάζει σε όλους. Είναι μια
+            εξατομικευμένη διαδικασία, σχεδιασμένη με επιστημονική γνώση, συνέπεια και σεβασμό
+            στη μοναδικότητα κάθε ανθρώπου.
           </p>
+
+          <!-- ΑΓΓΛΙΚΑ: μετάφραση του ελληνικού κειμένου της υπο-ενότητας, πιστή και με το ίδιο
+               ύφος (βρετανική ορθογραφία, όπως η υπόλοιπη σελίδα: personalised, programme).
+               Εγκρίθηκε από τον ιδιοκτήτη 18/10/2026 («μετάφρασέ τα εσύ»). -->
+          <p class="lang-en about-sub-lead">
+            Every person is unique. And so is their therapy.
+          </p>
+
           <p class="lang-en">
-            The goal is not simply to complete some exercises.
+            Every child has their own way of communicating, learning and growing. That is why every
+            therapeutic relationship starts from their own needs, their abilities and their own pace.
           </p>
+
+          <p class="lang-en">
+            Speech therapy is not a ready-made programme that fits everyone. It is a personalised
+            process, designed with scientific knowledge, consistency and respect for the uniqueness
+            of every person.
+          </p>
+
+          <h4 class="lang-el">Από την αξιολόγηση στην ουσιαστική πρόοδο</h4>
+          <ol class="lang-el about-steps">
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-comments"></i></span>
+              <span class="step-title">Γνωρίζουμε το παιδί και τις ανάγκες του</span>
+              <p>
+                Ξεκινάμε με συζήτηση με τους γονείς και αξιολόγηση των επικοινωνιακών και
+                γλωσσικών δεξιοτήτων του παιδιού, ώστε να κατανοήσουμε τις δυσκολίες, αλλά και τα
+                δυνατά του σημεία.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></span>
+              <span class="step-title">Σχεδιάζουμε μαζί τα επόμενα βήματα</span>
+              <p>
+                Με βάση τα ευρήματα της αξιολόγησης, θέτουμε συγκεκριμένους, εξατομικευμένους
+                θεραπευτικούς στόχους και οργανώνουμε ένα πρόγραμμα προσαρμοσμένο στην ηλικία, τις
+                δυνατότητες και τις ανάγκες του παιδιού.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-child"></i></span>
+              <span class="step-title">Μαθαίνουμε μέσα από το παιχνίδι και την καθημερινότητα</span>
+              <p>
+                Οι θεραπευτικές δραστηριότητες επιλέγονται με στόχο να έχουν νόημα για το παιδί, να
+                ενισχύουν τη συμμετοχή του και να κάνουν τη μάθηση μια ευχάριστη εμπειρία. Στόχος
+                δεν είναι απλώς να ολοκληρώνουμε ασκήσεις, αλλά να αξιοποιούνται όσα κατακτά στη
+                θεραπεία στην καθημερινή του ζωή.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-leaf"></i></span>
+              <span class="step-title">Παρακολουθούμε την εξέλιξη και προσαρμόζουμε το πρόγραμμα</span>
+              <p>
+                Κάθε μικρό βήμα έχει αξία. Παρακολουθούμε την πορεία του παιδιού, αξιολογούμε την
+                πρόοδό του και προσαρμόζουμε τους θεραπευτικούς στόχους και τις δραστηριότητες όπου
+                χρειάζεται.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-home"></i></span>
+              <span class="step-title">Είμαστε σε επικοινωνία με την οικογένεια</span>
+              <p>
+                Οι γονείς αποτελούν σημαντικό μέρος της θεραπευτικής διαδικασίας. Συζητάμε για την
+                πορεία του παιδιού, μοιραζόμαστε πρακτικές ιδέες για την καθημερινότητα και
+                αναζητούμε τρόπους να ενισχύσουμε την επικοινωνία του και έξω από τις συνεδρίες.
+              </p>
+            </li>
+          </ol>
+
+          <h4 class="lang-en">From assessment to meaningful progress</h4>
+          <ol class="lang-en about-steps">
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-comments"></i></span>
+              <span class="step-title">Getting to know the child and their needs</span>
+              <p>
+                We begin with a conversation with the parents and an assessment of the child's
+                communication and language skills, so that we can understand both the difficulties
+                and the child's strengths.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-calendar-alt"></i></span>
+              <span class="step-title">We plan the next steps together</span>
+              <p>
+                Based on the assessment findings, we set specific, personalised therapy goals and
+                organise a programme tailored to the child's age, abilities and needs.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-child"></i></span>
+              <span class="step-title">We learn through play and everyday life</span>
+              <p>
+                Therapy activities are chosen so that they are meaningful to the child, encourage
+                participation and make learning an enjoyable experience. The aim is not simply to
+                complete exercises, but for what the child achieves in therapy to be carried into
+                everyday life.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-leaf"></i></span>
+              <span class="step-title">We monitor progress and adapt the programme</span>
+              <p>
+                Every small step matters. We follow the child's progress, assess their development
+                and adapt the therapy goals and activities wherever needed.
+              </p>
+            </li>
+            <li>
+              <span class="step-icon" aria-hidden="true"><i class="fas fa-home"></i></span>
+              <span class="step-title">We stay in touch with the family</span>
+              <p>
+                Parents are an important part of the therapeutic process. We discuss the child's
+                progress, share practical ideas for everyday life and look for ways to support
+                communication outside the sessions as well.
+              </p>
+            </li>
+          </ol>
 
           <p class="lang-el">
-            Στόχος είναι η επικοινωνία να γίνει μέρος της καθημερινής ζωής.
-          </p>
-          <p class="lang-en">
-            The goal is for communication to become part of everyday life.
+            Όταν χρειάζεται, συνεργαζόμαστε με άλλους επαγγελματίες που υποστηρίζουν το παιδί, ώστε
+            να υπάρχει όσο το δυνατόν πιο ολοκληρωμένη προσέγγιση.
           </p>
 
-          <div class="about-highlights">
-            <div class="highlight-item">
-              <div class="icon"><i class="fas fa-baby"></i></div>
-              <span class="lang-el">Παιδιά</span><span class="lang-en">Children</span>
-            </div>
-            <div class="highlight-item">
-              <div class="icon"><i class="fas fa-user"></i></div>
-              <span class="lang-el">Ενήλικες</span><span class="lang-en">Adults</span>
-            </div>
-            <div class="highlight-item">
-              <div class="icon"><i class="fas fa-home"></i></div>
-              <span class="lang-el">Συνεδρίες κατ' οίκον</span><span class="lang-en">In-Home Sessions</span>
-            </div>
-            <div class="highlight-item">
-              <div class="icon"><i class="fas fa-globe"></i></div>
-              <span class="lang-el">Ελληνικά & Αγγλικά</span><span class="lang-en">Greek & English</span>
-            </div>
-          </div>
+          <p class="lang-en">
+            When needed, we work together with other professionals who support the child, so that
+            the approach is as complete as possible.
+          </p>
+
+          <h4 class="lang-el">Ο στόχος μας;</h4>
+          <h4 class="lang-en">Our goal?</h4>
+          <p class="lang-el">
+            Να μπορεί το παιδί να επικοινωνεί με μεγαλύτερη ευκολία, αυτοπεποίθηση και χαρά,
+            αξιοποιώντας τις δεξιότητές του στην καθημερινή ζωή.
+          </p>
+          <p class="lang-en">
+            For the child to communicate with greater ease, confidence and joy, making use of their
+            skills in everyday life.
+          </p>
+          <p class="lang-el about-emphasis">
+            Γιατί κάθε μικρό βήμα στην επικοινωνία μπορεί να κάνει μια μεγάλη διαφορά.
+          </p>
+          <p class="lang-en about-emphasis">
+            Because every small step in communication can make a big difference.
+          </p>
+
         </div>
       </div>
     </div>
@@ -727,13 +903,13 @@
   <!-- ============ SERVICES ============ -->
   <section class="section" id="services">
     <div class="container">
-      <div class="section-title fade-in">
+      <div class="section-title section-title--lead fade-in">
         <div class="label lang-el">Υπηρεσίες</div>
         <div class="label lang-en">Services</div>
         <h2 class="lang-el">Οι Υπηρεσίες μου</h2>
         <h2 class="lang-en">My Services</h2>
-        <p class="lang-el">Ολοκληρωμένες υπηρεσίες λογοθεραπείας κατ' οίκον για παιδιά και ενήλικες, προσαρμοσμένες στις ανάγκες σας.</p>
-        <p class="lang-en">Comprehensive in-home speech therapy services for children and adults, tailored to your needs.</p>
+        <p class="lang-el">Γιατί η επικοινωνία δεν περιορίζεται σε μία συνεδρία.<br>Είναι κομμάτι της καθημερινής μας ζωής.</p>
+        <p class="lang-en">Because communication is not limited to a single session.<br>It is part of our everyday life.</p>
       </div>
 
       <div class="services-grid">
@@ -741,51 +917,62 @@
         <!-- Service 1 -->
         <div class="service-card fade-in">
           <div class="icon-wrap">
-            <i class="fas fa-child"></i>
+            <i class="fas fa-comment"></i>
           </div>
-          <h3 class="lang-el">Παιδιά & Έφηβοι</h3>
-          <h3 class="lang-en">Children & Adolescents</h3>
+          <h3 class="lang-el">Αρθρωτικές &amp; Φωνολογικές Διαταραχές</h3>
+          <h3 class="lang-en">Articulation &amp; Phonological Disorders</h3>
           <p class="lang-el">
-            Αξιολόγηση και θεραπεία διαταραχών άρθρωσης, φωνολογικών διαταραχών, 
-            αναπτυξιακών γλωσσικών διαταραχών, τραυλισμού και μαθησιακών δυσκολιών.
+            Αξιολόγηση και αντιμετώπιση δυσκολιών στην παραγωγή και τη σωστή χρήση των ήχων της
+            ομιλίας. Μέσα από εξατομικευμένες δραστηριότητες, ενισχύουμε την καθαρότητα και την
+            καταληπτότητα της ομιλίας, βοηθώντας το παιδί να επικοινωνεί με μεγαλύτερη ευκολία και
+            αυτοπεποίθηση.
           </p>
           <p class="lang-en">
-            Assessment and treatment of articulation disorders, phonological disorders, 
-            developmental language disorders, stuttering, and learning difficulties.
+            Assessment and treatment of difficulties in producing and correctly using speech
+            sounds. Through personalised activities, we strengthen the clarity and intelligibility
+            of speech, helping the child communicate with greater ease and confidence.
           </p>
         </div>
 
         <!-- Service 2 -->
         <div class="service-card fade-in">
           <div class="icon-wrap">
-            <i class="fas fa-user-tie"></i>
+            <i class="fas fa-comments"></i>
           </div>
-          <h3 class="lang-el">Ενήλικες</h3>
-          <h3 class="lang-en">Adults</h3>
+          <h3 class="lang-el">Καθυστέρηση Λόγου &amp; Αναπτυξιακές Γλωσσικές Διαταραχές</h3>
+          <h3 class="lang-en">Speech Delay &amp; Developmental Language Disorders</h3>
           <p class="lang-el">
-            Αποκατάσταση λόγου και ομιλίας μετά από εγκεφαλικό επεισόδιο, τραύμα ή 
-            νευρολογικές παθήσεις. Διαχείριση τραυλισμού και διαταραχών φωνής.
+            Υποστήριξη παιδιών που παρουσιάζουν καθυστέρηση στην ανάπτυξη του λόγου και της ομιλίας
+            ή δυσκολίες στην κατανόηση και την έκφραση. Με δραστηριότητες προσαρμοσμένες στην ηλικία
+            και τις ανάγκες τους, ενισχύουμε το λεξιλόγιο, τη δημιουργία προτάσεων και τη
+            λειτουργική χρήση της γλώσσας στην καθημερινότητα.
           </p>
           <p class="lang-en">
-            Speech and language rehabilitation after stroke, injury, or neurological 
-            conditions. Stuttering management and voice disorders.
+            Support for children who show delay in the development of speech and language, or
+            difficulties in understanding and expression. With activities tailored to their age and
+            needs, we strengthen vocabulary, sentence formation and the functional use of language
+            in everyday life.
           </p>
         </div>
 
         <!-- Service 3 -->
         <div class="service-card fade-in">
           <div class="icon-wrap">
-            <i class="fas fa-comments"></i>
+            <i class="fas fa-puzzle-piece"></i>
           </div>
-          <h3 class="lang-el">Τραυλισμός</h3>
-          <h3 class="lang-en">Stuttering</h3>
+          <h3 class="lang-el">Αυτισμός &amp; Επικοινωνιακές Δυσκολίες</h3>
+          <h3 class="lang-en">Autism &amp; Communication Difficulties</h3>
           <p class="lang-el">
-            Εξατομικευμένη θεραπευτική προσέγγιση για παιδιά και ενήλικες με τραυλισμό, 
-            με στόχο την ευχέρεια λόγου και τη βελτίωση της επικοινωνίας.
+            Εξατομικευμένη λογοθεραπευτική υποστήριξη παιδιών στο φάσμα του αυτισμού, με ή χωρίς
+            αναπτυγμένο προφορικό λόγο. Μέσα από το παιχνίδι, την αλληλεπίδραση, τη μίμηση και την
+            αξιοποίηση οπτικών και άλλων υποστηρικτικών ερεθισμάτων, ενισχύουμε την επικοινωνιακή
+            πρόθεση, την κατανόηση, την έκφραση και τις δεξιότητες επικοινωνίας στην καθημερινή ζωή.
           </p>
           <p class="lang-en">
-            Personalized therapeutic approach for children and adults who stutter, 
-            aiming for speech fluency and improved communication.
+            Personalised speech therapy support for children on the autism spectrum, with or without
+            developed spoken language. Through play, interaction, imitation and the use of visual and
+            other supportive stimuli, we strengthen communicative intent, understanding, expression
+            and communication skills in everyday life.
           </p>
         </div>
 
@@ -794,19 +981,44 @@
           <div class="icon-wrap">
             <i class="fas fa-book-open"></i>
           </div>
-          <h3 class="lang-el">Δυσλεξία & Μαθησιακές Δυσκολίες</h3>
-          <h3 class="lang-en">Dyslexia & Learning Difficulties</h3>
+          <h3 class="lang-el">Δυσκολίες Ανάγνωσης &amp; Γραπτού Λόγου</h3>
+          <h3 class="lang-en">Reading &amp; Written Language Difficulties</h3>
           <p class="lang-el">
-            Υποστήριξη παιδιών με δυσλεξία, δυσγραφία, δυσαριθμησία και άλλες 
-            μαθησιακές δυσκολίες μέσω εξατομικευμένων εκπαιδευτικών παρεμβάσεων.
+            Λογοθεραπευτική υποστήριξη παιδιών που αντιμετωπίζουν δυσκολίες στην ανάγνωση, τη
+            γραφή, την ορθογραφία και τη γραπτή έκφραση. Στόχος είναι η ενίσχυση των γλωσσικών
+            δεξιοτήτων που συνδέονται με την κατάκτηση και τη χρήση του γραπτού λόγου, μέσα από
+            δραστηριότητες προσαρμοσμένες στις ανάγκες του κάθε παιδιού.
           </p>
           <p class="lang-en">
-            Support for children with dyslexia, dysgraphia, dyscalculia, and other 
-            learning difficulties through personalised educational interventions.
+            Speech therapy support for children who have difficulties with reading, writing,
+            spelling and written expression. The aim is to strengthen the language skills connected
+            with acquiring and using written language, through activities tailored to each child's
+            needs.
           </p>
         </div>
 
         <!-- Service 5 -->
+        <div class="service-card fade-in">
+          <div class="icon-wrap">
+            <i class="fas fa-user-doctor"></i>
+          </div>
+          <h3 class="lang-el">Λογοθεραπεία Ενηλίκων</h3>
+          <h3 class="lang-en">Speech Therapy for Adults</h3>
+          <p class="lang-el">
+            Αξιολόγηση και αποκατάσταση δυσκολιών λόγου, ομιλίας και επικοινωνίας που εμφανίζονται
+            μετά από αγγειακό εγκεφαλικό επεισόδιο ή σχετίζονται με νευρολογικές παθήσεις, όπως η
+            νόσος Parkinson και οι άνοιες. Στόχος είναι η ενίσχυση και διατήρηση της λειτουργικής
+            επικοινωνίας, με σεβασμό στις ανάγκες και την καθημερινότητα του κάθε ανθρώπου.
+          </p>
+          <p class="lang-en">
+            Assessment and rehabilitation of speech, language and communication difficulties that
+            appear after a stroke or are related to neurological conditions such as Parkinson's
+            disease and dementia. The aim is to strengthen and maintain functional communication,
+            with respect for each person's needs and daily life.
+          </p>
+        </div>
+
+        <!-- Service 6 -->
         <div class="service-card fade-in">
           <div class="icon-wrap">
             <i class="fas fa-microphone"></i>
@@ -814,30 +1026,16 @@
           <h3 class="lang-el">Διαταραχές Φωνής</h3>
           <h3 class="lang-en">Voice Disorders</h3>
           <p class="lang-el">
-            Αξιολόγηση και θεραπεία διαταραχών φωνής, βραχνάδας, αφωνίας και 
-            φωνητικής κόπωσης σε παιδιά και ενήλικες.
+            Αξιολόγηση και θεραπευτική υποστήριξη παιδιών και ενηλίκων που αντιμετωπίζουν δυσκολίες
+            στη φωνή, όπως βραχνάδα, αφωνία ή φωνητική κόπωση. Στόχος είναι η βελτίωση της φωνητικής
+            λειτουργίας και η ανάπτυξη πιο αποτελεσματικών τρόπων χρήσης της φωνής, σε συνεργασία με
+            τον κατάλληλο ιατρό όπου απαιτείται.
           </p>
           <p class="lang-en">
-            Assessment and treatment of voice disorders, hoarseness, aphonia, and 
-            vocal fatigue in children and adults.
-          </p>
-        </div>
-
-        <!-- Service 6 -->
-        <div class="service-card fade-in">
-          <div class="icon-wrap">
-            <i class="fas fa-home"></i>
-          </div>
-          <h3 class="lang-el">Λογοθεραπεία κατ' οίκον</h3>
-          <h3 class="lang-en">In-Home Therapy</h3>
-          <p class="lang-el">
-            Οι συνεδρίες πραγματοποιούνται κατ' οίκον, στον δικό σας χώρο — ιδανικά για παιδιά
-            που μαθαίνουν καλύτερα στο οικείο περιβάλλον τους και για ενήλικες ή άτομα
-            με δυσκολία μετακίνησης.
-          </p>
-          <p class="lang-en">
-            Sessions take place in your own home — ideal for children who thrive in a familiar
-            environment, and for adults or individuals with mobility difficulties.
+            Assessment and therapeutic support for children and adults who experience voice
+            difficulties such as hoarseness, loss of voice or vocal fatigue. The aim is to improve
+            vocal function and develop more effective ways of using the voice, in cooperation with
+            the appropriate doctor where required.
           </p>
         </div>
 
@@ -848,7 +1046,7 @@
   <!-- ============ TESTIMONIALS ============ -->
   <section class="section" id="testimonials">
     <div class="container">
-      <div class="section-title fade-in">
+      <div class="section-title section-title--lead fade-in">
         <div class="label lang-el">Κριτικές</div>
         <div class="label lang-en">Reviews</div>
         <h2 class="lang-el">Τι λένε οι θεραπευόμενοί μου</h2>
@@ -987,55 +1185,113 @@
   <!-- ============ FAQ ============ -->
   <section class="section" id="faq">
     <div class="container">
-      <div class="section-title fade-in">
+      <div class="section-title section-title--lead fade-in">
         <div class="label lang-el">Συχνές Ερωτήσεις</div>
         <div class="label lang-en">Frequently Asked Questions</div>
-        <h2 class="lang-el">Λογοθεραπεία κατ' οίκον — Όσα ρωτάτε συχνά</h2>
-        <h2 class="lang-en">In-Home Speech Therapy — Common Questions</h2>
+        <h2 class="lang-el">Όσα θέλετε να γνωρίζετε για τη λογοθεραπεία</h2>
+        <h2 class="lang-en">What You Want to Know About Speech Therapy</h2>
       </div>
 
       <div class="faq-grid">
 
         <div class="faq-item fade-in">
-          <h3 class="lang-el">Τι σημαίνει λογοθεραπεία κατ' οίκον;</h3>
-          <h3 class="lang-en">What does in-home speech therapy mean?</h3>
-          <p class="lang-el">Οι συνεδρίες λογοθεραπείας πραγματοποιούνται στον δικό σας χώρο, από πιστοποιημένη λογοθεραπεύτρια με το ίδιο επιστημονικό επίπεδο με ένα κέντρο — χωρίς να χρειαστεί να μετακινηθείτε.</p>
-          <p class="lang-en">Speech therapy sessions take place in your own home, delivered by a certified speech therapist with the same level of professional care as a center — without the need to travel.</p>
+          <h3 class="lang-el">Πότε είναι η κατάλληλη στιγμή να απευθυνθώ σε λογοθεραπευτή;</h3>
+          <h3 class="lang-en">When is the right time to see a speech therapist?</h3>
+          <p class="lang-el">Όταν παρατηρείτε ότι το παιδί σας δυσκολεύεται να εκφραστεί, να κατανοήσει όσα του λέτε, να προφέρει σωστά ορισμένους ήχους ή να επικοινωνήσει με τους γύρω του, μια λογοθεραπευτική αξιολόγηση μπορεί να βοηθήσει.</p>
+          <p class="lang-el">Κάθε παιδί αναπτύσσεται με τον δικό του ρυθμό. Ωστόσο, όταν υπάρχει προβληματισμός για την ανάπτυξη του λόγου και της ομιλίας, είναι προτιμότερο να ζητήσετε τη γνώμη ενός ειδικού, παρά να περιμένετε απλώς να περάσει ο χρόνος.</p>
+          <p class="lang-en">When you notice that your child finds it difficult to express themselves, to understand what you say, to pronounce certain sounds correctly or to communicate with the people around them, a speech therapy assessment can help.</p>
+          <p class="lang-en">Every child develops at their own pace. However, when there is a concern about the development of speech and language, it is better to ask a specialist's opinion than simply to wait for time to pass.</p>
         </div>
 
         <div class="faq-item fade-in">
-          <h3 class="lang-el">Κέντρο λογοθεραπείας ή κατ' οίκον; Ποια επιλογή σας ταιριάζει;</h3>
-          <h3 class="lang-en">Speech therapy center or in-home? Which option fits you?</h3>
-          <p class="lang-el">Κάθε οικογένεια είναι διαφορετική. Η κατ' οίκον επιλογή προσφέρει: οικείο περιβάλλον — ιδανικό για παιδιά που δυσκολεύονται σε άγνωστους χώρους —, εξοικονόμηση χρόνου από τις μετακινήσεις, ευελιξία για ενήλικες με κινητικά προβλήματα ή μετά από εγκεφαλικό, και παρατήρηση του θεραπευτή στο πραγματικό περιβάλλον της καθημερινότητας. Τα κέντρα διαθέτουν επί τόπου υποδομή και διεπιστημονική ομάδα. Τηλεφωνήστε μου για συμβουλές χωρίς καμία υποχρέωση.</p>
-          <p class="lang-en">Every family is different. The in-home option offers: a familiar environment — ideal for children who struggle in unfamiliar settings —, no travel time, flexibility for adults with mobility difficulties or after a stroke, and the therapist observing the real everyday environment. Centers offer on-site facilities and a multidisciplinary team. Call me for free, no-obligation advice.</p>
+          <h3 class="lang-el">Σε ποια ηλικία μπορεί ένα παιδί να ξεκινήσει λογοθεραπεία;</h3>
+          <h3 class="lang-en">At what age can a child start speech therapy?</h3>
+          <p class="lang-el">Η λογοθεραπευτική παρέμβαση μπορεί να ξεκινήσει από την προσχολική ηλικία, συχνά γύρω στα 3 έτη, ανάλογα με τις ανάγκες και το αναπτυξιακό στάδιο του παιδιού.</p>
+          <p class="lang-el">Ωστόσο, όταν υπάρχουν ενδείξεις καθυστέρησης στην ανάπτυξη του λόγου ή δυσκολίες στην επικοινωνία, η αξιολόγηση και η κατάλληλη υποστήριξη μπορούν να πραγματοποιηθούν και νωρίτερα.</p>
+          <p class="lang-el">Η έγκαιρη αναγνώριση των δυσκολιών είναι σημαντική, καθώς επιτρέπει την κατάλληλη παρέμβαση την περίοδο που το παιδί αναπτύσσει βασικές επικοινωνιακές και γλωσσικές δεξιότητες.</p>
+          <p class="lang-en">Speech therapy intervention can begin from preschool age, often around 3 years old, depending on the child's needs and developmental stage.</p>
+          <p class="lang-en">However, when there are signs of delay in speech development or difficulties in communication, assessment and appropriate support can also take place earlier.</p>
+          <p class="lang-en">Early recognition of difficulties matters, as it allows appropriate intervention during the period when the child is developing basic communication and language skills.</p>
         </div>
 
         <div class="faq-item fade-in">
-          <h3 class="lang-el">Σε ποιες περιοχές γίνονται κατ' οίκον συνεδρίες λογοθεραπείας;</h3>
-          <h3 class="lang-en">Which areas do in-home speech therapy sessions cover?</h3>
-          <p class="lang-el">Οι κατ' οίκον επισκέψεις καλύπτουν τη Γλυφάδα, το Ελληνικό–Αργυρούπολη, τη Βούλα, τη Βάρη, τη Βουλιαγμένη, τον Άλιμο και την Ηλιούπολη — δηλαδή το σύνολο των Νοτίων Προαστίων της Αττικής.</p>
-          <p class="lang-en">In-home visits cover Glyfada, Elliniko–Argyroupoli, Voula, Vari, Vouliagmeni, Alimos and Ilioupoli — the whole of the Southern Suburbs of Athens.</p>
+          <h3 class="lang-el">Πώς θα καταλάβω αν το παιδί μου χρειάζεται λογοθεραπεία;</h3>
+          <h3 class="lang-en">How will I know if my child needs speech therapy?</h3>
+          <p class="lang-el">Η διαδικασία ξεκινά με τη λήψη αναλυτικού ιστορικού από τους γονείς, ώστε να συγκεντρωθούν πληροφορίες σχετικά με την ανάπτυξη, την επικοινωνία και την καθημερινότητα του παιδιού.</p>
+          <p class="lang-el">Στη συνέχεια, πραγματοποιείται λογοθεραπευτική αξιολόγηση με τη χρήση σταθμισμένων δοκιμασιών, όπου ενδείκνυται, καθώς και μη σταθμισμένων εργαλείων αξιολόγησης, κλινικής παρατήρησης και κατάλληλου υλικού, ανάλογα με την ηλικία και τις ανάγκες του παιδιού.</p>
+          <p class="lang-el">Με βάση τα ευρήματα, συζητάμε τις δυσκολίες και τα δυνατά σημεία του παιδιού και αποφασίζουμε αν χρειάζεται θεραπευτική παρέμβαση, περαιτέρω διερεύνηση ή κάποια άλλη μορφή υποστήριξης.</p>
+          <p class="lang-en">The process begins with taking a detailed history from the parents, so that information is gathered about the child's development, communication and daily life.</p>
+          <p class="lang-en">A speech therapy assessment then follows, using standardised tests where indicated, as well as non-standardised assessment tools, clinical observation and appropriate materials, depending on the child's age and needs.</p>
+          <p class="lang-en">Based on the findings, we discuss the child's difficulties and strengths and decide whether therapeutic intervention, further investigation or another form of support is needed.</p>
         </div>
 
         <div class="faq-item fade-in">
-          <h3 class="lang-el">Πώς γίνεται μια συνεδρία λογοθεραπείας στο σπίτι;</h3>
-          <h3 class="lang-en">How does an in-home speech therapy session work?</h3>
-          <p class="lang-el">Μετά από αρχική αξιολόγηση, η λογοθεραπεύτρια προσέρχεται στο σπίτι σας με το κατάλληλο υλικό και παιχνίδια. Αρκεί ένας ήσυχος χώρος. Όπου χρειάζεται συμμετέχει ο γονέας, και μετά το πέρας των συνεδριών δίνεται καθοδήγηση για εξάσκηση στο σπίτι.</p>
-          <p class="lang-en">After an initial assessment, the speech therapist comes to your home with the necessary materials and games. All that is needed is a quiet space. Parents take part where appropriate, and after the sessions you receive guidance for home practice.</p>
+          <h3 class="lang-el">Πώς πραγματοποιείται μια συνεδρία λογοθεραπείας στο σπίτι;</h3>
+          <h3 class="lang-en">What does a speech therapy session at home look like?</h3>
+          <p class="lang-el">Οι συνεδρίες οργανώνονται με βάση την ηλικία, τις ανάγκες και τους θεραπευτικούς στόχους του παιδιού. Χρησιμοποιούνται κατάλληλα παιχνίδια, υλικά και δραστηριότητες που ενθαρρύνουν τη συμμετοχή και τη μάθηση.</p>
+          <p class="lang-el">Το οικείο περιβάλλον του σπιτιού μάς δίνει τη δυνατότητα να συνδέουμε, όπου είναι εφικτό, τις θεραπευτικές δραστηριότητες με πραγματικές καταστάσεις της καθημερινότητας.</p>
+          <p class="lang-en">Sessions are organised around the child's age, needs and therapeutic goals. Suitable toys, materials and activities are used to encourage participation and learning.</p>
+          <p class="lang-en">The familiar home environment allows us, where feasible, to connect therapeutic activities with real everyday situations.</p>
         </div>
 
         <div class="faq-item fade-in">
-          <h3 class="lang-el">Πόσο συχνά γίνονται οι συνεδρίες και πόσο διαρκούν;</h3>
-          <h3 class="lang-en">How often are sessions and how long do they last?</h3>
-          <p class="lang-el">Η συχνότητα και η διάρκεια διαμορφώνονται εξατομικευμένα μετά την αξιολόγηση — συνήθως 2-3 φορές την εβδομάδα, με συνεδρίες 40 λεπτών, ανάλογα με τους στόχους.</p>
-          <p class="lang-en">Frequency and duration are tailored after the assessment — typically 2-3 times per week, with 40-minute sessions, depending on your goals.</p>
+          <h3 class="lang-el">Πόσο συχνά πραγματοποιούνται οι συνεδρίες και πόσο διαρκεί η θεραπεία;</h3>
+          <h3 class="lang-en">How often do sessions take place and how long does therapy last?</h3>
+          <p class="lang-el">Οι συνεδρίες λογοθεραπείας πραγματοποιούνται δύο φορές την εβδομάδα, με διάρκεια 40 λεπτών η καθεμία.</p>
+          <p class="lang-el">Η συνολική διάρκεια της θεραπευτικής παρέμβασης διαφέρει από άτομο σε άτομο, καθώς εξαρτάται από τη φύση των δυσκολιών, τους θεραπευτικούς στόχους και την εξέλιξη της θεραπείας.</p>
+          <p class="lang-el">Η πρόοδος παρακολουθείται συστηματικά και το θεραπευτικό πρόγραμμα προσαρμόζεται όπου χρειάζεται.</p>
+          <p class="lang-en">Speech therapy sessions take place twice a week, each lasting 40 minutes.</p>
+          <p class="lang-en">The overall duration of the therapeutic intervention differs from person to person, as it depends on the nature of the difficulties, the therapeutic goals and the progress of therapy.</p>
+          <p class="lang-en">Progress is monitored systematically and the therapeutic programme is adjusted where needed.</p>
         </div>
 
         <div class="faq-item fade-in">
-          <h3 class="lang-el">Καλύπτεται η λογοθεραπεία από ασφαλιστικά ταμεία;</h3>
-          <h3 class="lang-en">Is speech therapy covered by insurance funds?</h3>
-          <p class="lang-el">Ναι — γίνονται δεκτά όλα τα ασφαλιστικά ταμεία, αλλά υπάρχει η δυνατότητα πραγματοποίησης και ιδιωτικών ραντεβού. Επικοινωνήστε μαζί μου για περισσότερες λεπτομέρειες σχετικά με το δικό σας ταμείο.</p>
-          <p class="lang-en">Yes — all Greek insurance funds are accepted, but private appointments are also possible. Contact me for more details about your specific fund.</p>
+          <h3 class="lang-el">Πώς μπορώ ως γονιός να βοηθήσω το παιδί μου;</h3>
+          <h3 class="lang-en">How can I, as a parent, help my child?</h3>
+          <p class="lang-el">Η συνεργασία με την οικογένεια αποτελεί σημαντικό κομμάτι της θεραπευτικής διαδικασίας.</p>
+          <p class="lang-el">Μέσα από ενημέρωση, καθοδήγηση και απλές δραστηριότητες που μπορούν να ενταχθούν στην καθημερινότητα, οι γονείς έχουν τη δυνατότητα να ενισχύσουν τις δεξιότητες που καλλιεργούνται στις συνεδρίες, χωρίς το σπίτι να μετατρέπεται σε χώρο συνεχών ασκήσεων.</p>
+          <p class="lang-en">Cooperation with the family is an important part of the therapeutic process.</p>
+          <p class="lang-en">Through information, guidance and simple activities that can be woven into everyday life, parents can reinforce the skills being developed in the sessions, without the home turning into a place of constant exercises.</p>
+        </div>
+
+        <div class="faq-item fade-in">
+          <h3 class="lang-el">Σε ποιες περιοχές πραγματοποιούνται οι κατ' οίκον συνεδρίες;</h3>
+          <h3 class="lang-en">Which areas do in-home sessions cover?</h3>
+          <p class="lang-el">Οι συνεδρίες πραγματοποιούνται κατ' οίκον στη Γλυφάδα και σε περιοχές των Νοτίων Προαστίων της Αττικής, κατόπιν συνεννόησης.</p>
+          <ul class="faq-areas lang-el">
+            <li>Γλυφάδα</li>
+            <li>Ελληνικό</li>
+            <li>Αργυρούπολη</li>
+            <li>Βούλα</li>
+            <li>Βάρη</li>
+            <li>Βουλιαγμένη</li>
+            <li>Άλιμος</li>
+            <li>Ηλιούπολη</li>
+          </ul>
+          <p class="lang-el">Για πληροφορίες σχετικά με τη διαθεσιμότητα στην περιοχή σας, μπορείτε να επικοινωνήσετε μαζί μου.</p>
+          <p class="lang-en">Sessions take place at home in Glyfada and in areas of the Southern Suburbs of Attica, by arrangement.</p>
+          <ul class="faq-areas lang-en">
+            <li>Glyfada</li>
+            <li>Elliniko</li>
+            <li>Argyroupoli</li>
+            <li>Voula</li>
+            <li>Vari</li>
+            <li>Vouliagmeni</li>
+            <li>Alimos</li>
+            <li>Ilioupoli</li>
+          </ul>
+          <p class="lang-en">For information about availability in your area, you can contact me.</p>
+        </div>
+
+        <div class="faq-item fade-in">
+          <h3 class="lang-el">Καλύπτεται η λογοθεραπεία από τον ΕΟΠΥΥ;</h3>
+          <h3 class="lang-en">Is speech therapy covered by EOPYY?</h3>
+          <p class="lang-el">Παρέχονται νόμιμες αποδείξεις για τις λογοθεραπευτικές συνεδρίες.</p>
+          <p class="lang-el">Όταν υπάρχει η κατάλληλη γνωμάτευση και πληρούνται οι προβλεπόμενες προϋποθέσεις, μπορεί να υπάρχει δυνατότητα αποζημίωσης από τον ΕΟΠΥΥ, σύμφωνα με την ισχύουσα διαδικασία.</p>
+          <p class="lang-el">Για περισσότερες πληροφορίες σχετικά με τα απαραίτητα δικαιολογητικά, μπορείτε να επικοινωνήσετε μαζί μου.</p>
+          <p class="lang-en">Legal receipts are provided for the speech therapy sessions.</p>
+          <p class="lang-en">When the appropriate medical opinion is in place and the prescribed conditions are met, reimbursement by EOPYY may be possible, in accordance with the current procedure.</p>
+          <p class="lang-en">For more information about the required documents, you can contact me.</p>
         </div>
 
       </div>
@@ -1045,13 +1301,13 @@
   <!-- ============ CONTACT ============ -->
   <section class="section section-dark-alt" id="contact">
     <div class="container">
-      <div class="section-title fade-in">
+      <div class="section-title section-title--lead fade-in">
         <div class="label lang-el">Επικοινωνία</div>
         <div class="label lang-en">Contact</div>
-        <h2 class="lang-el">Ελάτε σε Επαφή</h2>
-        <h2 class="lang-en">Get in Touch</h2>
-        <p class="lang-el">Κλείστε το ραντεβού σας σήμερα. Οι συνεδρίες πραγματοποιούνται κατ' οίκον — με μεγάλη μου χαρά θα σας εξυπηρετήσω.</p>
-        <p class="lang-en">Book your appointment today. Sessions take place at your home — I will be delighted to assist you.</p>
+        <h2 class="lang-el">Ας Μιλήσουμε!</h2>
+        <h2 class="lang-en">Let's Talk!</h2>
+        <p class="lang-el">Κάθε επικοινωνία ξεκινά με ένα πρώτο βήμα. Είμαι στη διάθεσή σας για να συζητήσουμε όσα σας απασχολούν και να δούμε μαζί πώς μπορώ να σας εξυπηρετήσω.</p>
+        <p class="lang-en">Every conversation begins with a first step. I am at your disposal to discuss whatever is on your mind and to see together how I can be of service to you.</p>
       </div>
 
       <div class="contact-grid">
@@ -1061,8 +1317,8 @@
             <div>
               <h3 class="lang-el">Περιοχή Εξυπηρέτησης</h3>
               <h3 class="lang-en">Service Area</h3>
-              <p class="lang-el">Κατ' οίκον επισκέψεις σε: Γλυφάδα, Ελληνικό–Αργυρούπολη, Βούλα, Βάρη, Βουλιαγμένη, Άλιμο και Ηλιούπολη</p>
-              <p class="lang-en">Home visits across: Glyfada, Elliniko–Argyroupoli, Voula, Vari, Vouliagmeni, Alimos and Ilioupoli</p>
+              <p class="lang-el">Κατ' οίκον επισκέψεις σε: Γλυφάδα, Ελληνικό, Αργυρούπολη, Βούλα, Βάρη, Βουλιαγμένη, Άλιμο και Ηλιούπολη</p>
+              <p class="lang-en">Home visits across: Glyfada, Elliniko, Argyroupoli, Voula, Vari, Vouliagmeni, Alimos and Ilioupoli</p>
             </div>
           </div>
 
@@ -1153,23 +1409,21 @@
             </div>
 
             <div class="form-group" data-field="service">
-              <label for="service" class="lang-el">Υπηρεσία που σας ενδιαφέρει</label>
-              <label for="service" class="lang-en">Service of Interest</label>
+              <label for="service" class="lang-el">Πώς μπορώ να σας βοηθήσω;</label>
+              <label for="service" class="lang-en">How can I help you?</label>
               <select id="service" name="service">
                 <option value="" class="lang-el">-- Επιλέξτε --</option>
                 <option value="" class="lang-en">-- Select --</option>
-                <option value="children" class="lang-el">Παιδιά & Έφηβοι</option>
-                <option value="children" class="lang-en">Children & Adolescents</option>
-                <option value="adults" class="lang-el">Ενήλικες</option>
-                <option value="adults" class="lang-en">Adults</option>
-                <option value="stuttering" class="lang-el">Τραυλισμός</option>
-                <option value="stuttering" class="lang-en">Stuttering</option>
-                <option value="learning" class="lang-el">Δυσλεξία / Μαθησιακές Δυσκολίες</option>
-                <option value="learning" class="lang-en">Dyslexia / Learning Difficulties</option>
-                <option value="voice" class="lang-el">Διαταραχές Φωνής</option>
-                <option value="voice" class="lang-en">Voice Disorders</option>
-                <option value="other" class="lang-el">Άλλο</option>
-                <option value="other" class="lang-en">Other</option>
+                <option value="assessment" class="lang-el">Λογοθεραπευτική αξιολόγηση</option>
+                <option value="assessment" class="lang-en">Speech therapy assessment</option>
+                <option value="child" class="lang-el">Λογοθεραπεία για παιδί ή έφηβο</option>
+                <option value="child" class="lang-en">Speech therapy for a child or teenager</option>
+                <option value="adult" class="lang-el">Λογοθεραπεία για ενήλικα</option>
+                <option value="adult" class="lang-en">Speech therapy for an adult</option>
+                <option value="sessions" class="lang-el">Πληροφορίες για τις συνεδρίες</option>
+                <option value="sessions" class="lang-en">Information about sessions</option>
+                <option value="other" class="lang-el">Άλλο ερώτημα</option>
+                <option value="other" class="lang-en">Another question</option>
               </select>
             </div>
 
@@ -1181,8 +1435,8 @@
                    read a field called "message". -->
               <label for="message-el" class="lang-el">Μήνυμα *</label>
               <label for="message-en" class="lang-en">Message *</label>
-              <textarea id="message-el" name="message" required maxlength="2000" class="lang-el" placeholder="Γράψτε το μήνυμά σας..."></textarea>
-              <textarea id="message-en" name="message" required maxlength="2000" class="lang-en" placeholder="Write your message..."></textarea>
+              <textarea id="message-el" name="message" required maxlength="2000" class="lang-el" placeholder="Γράψτε μου λίγα λόγια για το θέμα που σας απασχολεί ή την πληροφορία που θα θέλατε να μάθετε…"></textarea>
+              <textarea id="message-en" name="message" required maxlength="2000" class="lang-en" placeholder="Tell me a few words about the issue that concerns you, or the information you would like to know…"></textarea>
               <p class="field-error"><span class="lang-el">Παρακαλώ γράψτε ένα μήνυμα τουλάχιστον 10 χαρακτήρων.</span><span class="lang-en">Please write a message of at least 10 characters.</span></p>
             </div>
 
@@ -1193,10 +1447,10 @@
               <i class="fas fa-paper-plane"></i> <span>Send Message</span>
             </button>
           </form>
-          <p class="direct-email lang-el" style="margin-top:1.25rem">Τα στοιχεία σας χρησιμοποιούνται μόνο για να σας απαντήσω. Για κλινικά ζητήματα τηλεφωνήστε στο <a href="tel:+306937524966">693 752 4966</a> — μη στέλνετε ιατρικές λεπτομέρειες με τη φόρμα. <a href="privacy.html">Πολιτική Απορρήτου</a>.</p>
-          <p class="direct-email lang-en" style="margin-top:1.25rem">Your details are used only to reply to you. For clinical matters call <a href="tel:+306937524966">+30 693 752 4966</a> — please do not send medical details through the form. <a href="privacy.html">Privacy Policy</a>.</p>
-          <p class="direct-email lang-el">ή στείλτε μου email απευθείας στο <a href="mailto:tsiga.kat@gmail.com">tsiga.kat@gmail.com</a></p>
-          <p class="direct-email lang-en">or email me directly at <a href="mailto:tsiga.kat@gmail.com">tsiga.kat@gmail.com</a></p>
+          <p class="form-note-title lang-el">Προστασία προσωπικών δεδομένων</p>
+          <p class="form-note-title lang-en">Personal Data Protection</p>
+          <p class="direct-email lang-el">Τα στοιχεία επικοινωνίας σας χρησιμοποιούνται αποκλειστικά για την απάντηση στο μήνυμά σας. Παρακαλώ μην αναφέρετε ευαίσθητες προσωπικές ή ιατρικές πληροφορίες μέσω της φόρμας. Για περισσότερες λεπτομέρειες, μπορείτε να διαβάσετε την <a href="privacy.html">Πολιτική Απορρήτου</a>.</p>
+          <p class="direct-email lang-en">Your contact details are used exclusively to reply to your message. Please do not mention sensitive personal or medical information through the form. For more details, you can read our <a href="privacy.html">Privacy Policy</a>.</p>
           <div id="formSuccess" style="display:none; text-align:center; padding:30px;">
             <i class="fas fa-check-circle" style="font-size:48px; color:var(--primary); margin-bottom:16px;"></i>
             <p class="lang-el">Το μήνυμά σας στάλθηκε επιτυχώς! Θα επικοινωνήσω σύντομα μαζί σας. Σας ευχαριστώ.</p>
@@ -1234,18 +1488,18 @@
       <div class="footer-grid">
         <div class="footer-about">
           <div class="footer-logo">
-            <span class="lang-el">Κατερίνα Τσίγα - Λογοθεραπεύτρια</span>
-            <span class="lang-en">Katerina Tsiga - Speech Therapist</span>
+            <span class="lang-el"><span class="f-name">Κατερίνα Τσίγα</span><span class="f-role">Λογοθεραπεύτρια</span></span>
+            <span class="lang-en"><span class="f-name">Katerina Tsiga</span><span class="f-role">Speech Therapist</span></span>
           </div>
           <p class="lang-el">
             Εξατομικευμένες συνεδρίες λογοθεραπείας κατ' οίκον για παιδιά και ενήλικες,
-            στα Νότια Προάστια της Αττικής.
-            Με αγάπη, υπομονή και επιστημονική κατάρτιση.
+            στα Νότια Προάστια της Αττικής, με επίκεντρο τις ανάγκες του κάθε ανθρώπου
+            και την ουσιαστική επικοινωνία.
           </p>
           <p class="lang-en">
             Personalised in-home speech therapy sessions for children and adults
-            across the Southern Suburbs of Attica.
-            With care, patience, and scientific expertise.
+            across the Southern Suburbs of Attica, centred on each person's needs
+            and on meaningful communication.
           </p>
         </div>
         <div class="footer-links">
@@ -1278,6 +1532,17 @@
           <span class="lang-el">Ρυθμίσεις cookies</span>
           <span class="lang-en">Cookie settings</span>
         </button>
+      </div>
+
+      <!-- Επιστροφή στην αρχή — το ΤΕΛΕΥΤΑΙΟ στοιχείο της σελίδας (18/10/2026).
+           Είναι <a href="#hero"> και όχι <button>, ώστε να δουλεύει και χωρίς JavaScript· το JS
+           αναλαμβάνει μόνο το ομαλό scroll και τη μεταφορά εστίασης για πληκτρολόγιο/screen reader. -->
+      <div class="back-to-top-wrap">
+        <a class="back-to-top" href="#hero" id="backToTop">
+          <i class="fas fa-arrow-up" aria-hidden="true"></i>
+          <span class="lang-el">Επιστροφή στην αρχή</span>
+          <span class="lang-en">Back to top</span>
+        </a>
       </div>
     </div>
   </footer>
@@ -1556,12 +1821,11 @@
     const LIMIT_MAX = 15;                     // max sends per window (was 5)
 
     const SERVICES = {
-      children: { el: 'Παιδιά & Έφηβοι', en: 'Children & Adolescents' },
-      adults: { el: 'Ενήλικες', en: 'Adults' },
-      stuttering: { el: 'Τραυλισμός', en: 'Stuttering' },
-      learning: { el: 'Δυσλεξία / Μαθησιακές Δυσκολίες', en: 'Dyslexia / Learning Difficulties' },
-      voice: { el: 'Διαταραχές Φωνής', en: 'Voice Disorders' },
-      other: { el: 'Άλλο', en: 'Other' }
+      assessment: { el: 'Λογοθεραπευτική αξιολόγηση', en: 'Speech therapy assessment' },
+      child: { el: 'Λογοθεραπεία για παιδί ή έφηβο', en: 'Speech therapy for a child or teenager' },
+      adult: { el: 'Λογοθεραπεία για ενήλικα', en: 'Speech therapy for an adult' },
+      sessions: { el: 'Πληροφορίες για τις συνεδρίες', en: 'Information about sessions' },
+      other: { el: 'Άλλο ερώτημα', en: 'Another question' }
     };
 
     const $ = id => document.getElementById(id);
@@ -1790,7 +2054,6 @@
 
       var window_ = overlay.querySelector('.welcome-window');
       var enter = overlay.querySelector('.welcome-enter');
-      var closeBtn = overlay.querySelector('.welcome-close');
       var lastFocus = document.activeElement;
       var closed = false;
 
@@ -1822,16 +2085,14 @@
       overlay.hidden = false;
       document.documentElement.classList.add('welcome-open');
 
-      // κάθε κλικ μέσα στο overlay: το «Μάθετε περισσότερα» και το × κλείνουν, όπως και ένα κλικ στο φόντο
-      overlay.addEventListener('click', function (e) {
-        if (closeBtn && closeBtn.contains(e.target)) { close(false); return; }
-        close(true);
-      });
+      // Κάθε κλικ μέσα στο overlay κλείνει και μπαίνει στο site (δεν υπάρχει πια × — ζητήθηκε
+      // 18/10/2026: «να πατήσει απλά οπουδήποτε στην εικόνα»).
+      overlay.addEventListener('click', function () { close(true); });
       // το πληκτρολόγιο πρέπει να δουλεύει: Escape κλείνει, Tab μένει μέσα στο παράθυρο
       overlay.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') { e.preventDefault(); close(false); return; }
         if (e.key !== 'Tab') return;
-        var focusables = [enter, closeBtn].filter(Boolean);
+        var focusables = [enter].filter(Boolean);
         if (!focusables.length) return;
         var first = focusables[0], last = focusables[focusables.length - 1];
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
@@ -1839,12 +2100,36 @@
       });
       // ο έλεγχος ταυτότητας γίνεται στο link/κουμπί, οπότε ο browser δεν «κλείνει» μόνος του τίποτα
       if (enter) enter.addEventListener('click', function (e) { e.preventDefault(); close(true); });
-      if (closeBtn) closeBtn.addEventListener('click', function (e) { e.preventDefault(); close(false); });
       // Focus στο ΙΔΙΟ το παράθυρο, όχι στο .welcome-enter: το link είναι αόρατο πάνω στο
       // ζωγραφισμένο κουμπί, και ένα focus ring εκεί ζωγραφίζει ένα δαχτυλίδι γύρω από το
       // κουμπί της εικόνας (φάνηκε στο screenshot του κινητού). Με `tabindex="-1"` στο
       // παράθυρο, το Escape και το Tab δουλεύουν και δεν ζωγραφίζεται τίποτα.
       if (window_.focus) { try { window_.focus({ preventScroll: true }); } catch (e) { window_.focus(); } }
+    })();
+  </script>
+
+  <script>
+    /* «Επιστροφή στην αρχή» — ομαλό scroll + μεταφορά εστίασης (18/10/2026).
+       Χωρίς JS το <a href="#hero"> δουλεύει ήδη· εδώ μόνο το κάνουμε ομαλό και βάζουμε το
+       focus στον τίτλο της hero (H1), ώστε ο χρήστης πληκτρολογίου/screen reader να μη «χαθεί»
+       μετά το άλμα. (Στο σχόλιο γράφεται «H1» χωρίς αγκύλες, και το script δεν περιέχει το
+       άνοιγμα της ετικέτας: το seo-parity.py μετρά τέτοια strings μέσα στα <script> ως H1.) */
+    (function () {
+      var btn = document.getElementById('backToTop');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        var hero = document.getElementById('hero');
+        var h1 = hero && hero.querySelector('h1');
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        if (h1) {
+          if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1');
+          try { h1.focus({ preventScroll: true }); } catch (err) { h1.focus(); }
+        }
+        // καθαρό URL: χωρίς #hero στο history
+        try { history.replaceState(null, '', location.pathname + location.search); } catch (err) {}
+      });
     })();
   </script>
 

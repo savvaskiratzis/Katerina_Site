@@ -109,7 +109,7 @@ export async function onRequestPost(context) {
     "Ονοματεπώνυμο: " + name,
     "Email: " + email,
     "Τηλέφωνο: " + (phone || "—"),
-    "Υπηρεσία: " + (service || "—"),
+    "Θέμα: " + (service || "—"),
     "",
     "Μήνυμα:",
     message,

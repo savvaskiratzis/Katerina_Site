@@ -61,7 +61,7 @@ const DESKTOP = `(() => {
   const a = document.querySelector('.sub-parent'), i = a.querySelector('i');
   const sp = Array.from(a.querySelectorAll('span')).find(s => s.offsetParent !== null);
   const ur = ul.getBoundingClientRect();
-  const logo = document.querySelector('.logo-icon').getBoundingClientRect();
+  const logo = document.querySelector('.logo a, .logo-img').getBoundingClientRect();
   const lt = document.querySelector('.lang-toggle').getBoundingClientRect();
   const ri = i.getBoundingClientRect(), rs = sp.getBoundingClientRect();
   return {items,

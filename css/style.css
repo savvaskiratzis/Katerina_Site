@@ -377,44 +377,60 @@ header .container {
   color: var(--text-light);
 }
 
+
+
+/* Λογότυπο header (18/10/2026, 2η εκδοχή): το ΕΙΚΟΝΙΔΙΟ είναι εικόνα (σπίτι + χαμόγελο, διαφανές
+   φόντο από tools/build-logo-mark.py) και το «Κατερίνα Τσίγα / ΛΟΓΟΘΕΡΑΠΕΥΤΡΑ» μένει ΖΩΝΤΑΝΟ
+   κείμενο — ζητήθηκε ρητά, ώστε να μη διπλασιάζεται το «Λογοθεραπεύτρια» μέσα στην ίδια εικόνα.
+   Χωρίς κυκλικό φόντο πλέον: το σήμα δεν είναι σφραγίδα αλλά σπιτάκι, και ένας sage δίσκος από
+   πίσω θα το έκοβε. */
+.logo-icon {
+  width: 46px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .logo-text {
   display: flex;
   flex-direction: column;
+  /* 8px «ανάσα» ανάμεσα στο όνομα και το ΛΟΓΟΘΕΡΑΠΕΥΤΡΑ. Με την italic Literata το ουράκι του
+     «ρ» του «Κατερίνα» κατεβαίνει κάτω από το line box (μετρημένο: 3px gap = 0px κενό μελάνης,
+     8px gap = 3.25px). */
+  gap: 8px;
 }
 
 .logo-text .name {
-  font-family: var(--font-heading);
+  /* Ίδια γραμματοσειρά με το «Καλώς ήρθατε!» (.w-hi): Literata *italic* 600, χρώμα τερρακότας. */
+  font-family: var(--font-display);
+  font-style: italic;
   font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.1;
+  color: var(--terracotta);
 }
 
 .logo-text .subtitle {
+  /* …και το «ΛΟΓΟΘΕΡΑΠΕΥΤΡΑ» όπως η υπογράμμιση του artwork: Mulish, 600, caps, 0.26em. */
+  font-family: var(--font-heading);
   font-size: 11px;
+  font-weight: 600;
   color: var(--primary);
-  letter-spacing: 1px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
 }
 
-.logo-icon {
-  width: 50px;
-  height: 50px;
-  background: var(--primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-  /* Το badge έχει πλέον εικόνα (λογότυπο ιδιοκτήτη) αντί για τα αρχικά «ΚΤ»: το overflow
-     κρατά την εικόνα μέσα στον κύκλο ώστε να μη φαίνονται οι κρεμ γωνίες του τετραγώνου. */
-  overflow: hidden;
+@media (max-width: 991px) {
+  .logo-text .name { font-size: 19px; }
+  .logo-icon { width: 40px; }
 }
-
-.logo-icon img,
-.logo-icon picture { display: block; }
-.logo-icon img { width: 50px; height: 50px; border-radius: 50%; }
 
 /* Navigation */
 nav {
@@ -696,6 +712,29 @@ nav {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.8;
+  /* Ισορρόπηση γραμμών: χωρίς αυτό η τελευταία γραμμή έμενε με μία λέξη («εξυπηρετήσω.» στην
+     Επικοινωνία). Εφαρμόζεται σε όλους τους υποτίτλους ενοτήτων — δεν αλλάζει τίποτε όπου το
+     κείμενο χωράει σε μία γραμμή ή έχει ήδη <br>. */
+  text-wrap: balance;
+}
+
+/* «Οι Υπηρεσίες μου» — Ο ΤΙΤΛΟΣ (h2) στο ύφος της εισαγωγής του «Σχετικά με Εμένα»
+   («Η λογοθεραπεία για μένα ξεκινά από τη σύνδεση.»): Literata italic, βάρος 500, sage-dark,
+   ίδιο μέγεθος (28px). Ζητήθηκε 18/10/2026: «δεν μου αρέσει το “Οι Υπηρεσίες μου”, θέλω να είναι
+   σαν το “Η λογοθεραπεία για μένα ξεκινά από τη σύνδεση”».
+   Σκοπηματικά scoped με `.section-title--lead`, ώστε οι άλλοι τίτλοι ενοτήτων να μείνουν Mulish. */
+.section-title--lead h2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.35;
+  color: var(--sage-dark);
+  margin-bottom: 14px;
+}
+
+@media (max-width: 767px) {
+  .section-title--lead h2 { font-size: 24px; }
 }
 
 /* ---------- About ---------- */
@@ -715,7 +754,7 @@ nav {
      1280–1920. Η φωτογραφία «κλείνει» ακριβώς με αυτό το κείμενο — χωρίς stretch (η περικοπή
      γίνεται μία φορά στο αρχείο, βλ. build-about-portrait.py). ΑΛΛΑΞΕ 19/9 (β' έκδοση κειμένου:
      702 → 604) μαζί με το όνομα των assets, γιατί το /images/* είναι immutable. */
-  aspect-ratio: 550 / 651;
+  aspect-ratio: 550 / 627;
   background: linear-gradient(135deg, var(--dark-light), var(--dark-soft));
   display: flex;
   align-items: center;
@@ -743,6 +782,16 @@ nav {
   background: var(--primary);
   opacity: 0.1;
   border-radius: 50%;
+}
+
+/* Οπτική ευθυγράμμιση προσώπου/κειμένου στο «Η λογοθεραπεία για μένα ξεκινά από τη σύνδεση»
+   (ζήτηση 18/10/2026): η φωτογραφία πρέπει να ξεκινά στη γραμμή των ΓΡΑΜΜΑΤΩΝ της εισαγωγικής
+   φράσης και να τελειώνει στη γραμμή του «…παρέμβαση σε διαταραχές λόγου, ομιλίας και
+   επικοινωνίας.». Μετρημένο (screenshot 2x, στήλη 550px): μελάνι εισαγωγής 19px από την κορυφή
+   της σειράς, τελευταία γραμμή 645.5px → η φωτογραφία θέλει ύψος 626.5 (γι' αυτό αναλογία
+   550/627, ξαναφτιαγμένη από το tools/build-about-portrait.py) και +19px μετατόπιση. */
+@media (min-width: 992px) {
+  .about-image { margin-top: 19px; }
 }
 
 .about-text h3 {
@@ -809,6 +858,225 @@ nav {
   margin: 26px 0 12px;
 }
 
+/* «Πώς δουλεύω» — εισαγωγική φράση της υπο-ενότητας («Κάθε άνθρωπος είναι μοναδικός…»).
+   Πιο μικρή από το κύριο .about-lead (28px) επίτηδες: εδώ η h3 «Πώς δουλεύω» είναι επίσης 28px
+   και δύο ίδια μεγέθη στη σειρά θα έσβηναν την ιεραρχία. Ίδια οικογένεια/βάρος/χρώμα με τα h3. */
+.about-text .about-sub-lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--sage-dark);
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+
+/* «Από την αξιολόγηση στην ουσιαστική πρόοδο» — τα 5 βήματα (κείμενο ιδιοκτήτη 18/10/2026).
+   Το <ol> μένει σημασιολογικό (screen readers / SEO) αλλά το οπτικό σημάδι είναι ΕΙΚΟΝΙΔΙΟ και όχι
+   αριθμός (ζητήθηκε: «αντί 1,2,3,4,5 εικονίδια που παραπέμπουν στο κείμενο»). Κάθε εικονίδιο
+   διαλέχτηκε από το ΥΠΑΡΧΟΝ subset της FontAwesome (tools/fontawesome-subset.json) — ένα glyph
+   εκτός subset δεν έχει γράμμα στη γραμματοσειρά και βγαίνει κενό τετραγωνάκι. */
+.about-steps {
+  list-style: none;
+  margin: 6px 0 18px;
+  padding: 0;
+}
+
+.about-steps > li {
+  position: relative;
+  padding-left: 46px;
+  margin-bottom: 20px;
+}
+
+.about-steps .step-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(107, 115, 99, 0.10);
+  border: 1px solid var(--sage-line);
+  color: var(--sage-dark);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.about-steps .step-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--sage-dark);
+  margin-bottom: 6px;
+}
+
+.about-text .about-steps p {
+  font-size: 15.5px;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* Η κατακλείδα «Γιατί κάθε μικρό βήμα στην επικοινωνία μπορεί να κάνει μια μεγάλη διαφορά.»
+   ζητήθηκε BOLD και στην ΙΔΙΑ γραμματοσειρά με την εισαγωγική φράση της υπο-ενότητας
+   («Κάθε άνθρωπος είναι μοναδικός…»), δηλαδή Literata italic. Η Literata είναι variable 400–700,
+   άρα το 700 italic υπάρχει πραγματικά (δεν προσποιείται bold). */
+.about-text .about-emphasis {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  /* 18px: ένα σκαλί πάνω από τα 16px του σώματος και ένα κάτω από τα 21px της εισαγωγικής
+     φράσης («Κάθε άνθρωπος είναι μοναδικός…»), ώστε να διαβάζεται ως κατακλείδα χωρίς να
+     ανταγωνίζεται το lead. line-height 1.6 γιατί η italic Literata έχει ψηλότερα τονισμένα. */
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--sage-dark);
+}
+
+/* «Πώς δουλεύω» — δεύτερο δίστιχο μέσα στην ίδια ενότητα: ΔΥΟ εικονογραφήσεις αριστερά (σε όλο
+   το ύψος του κειμένου) και το κείμενο δεξιά. Ζητήθηκε 18/10/2026. */
+.about-grid + .about-grid { margin-top: 70px; }
+
+/* Η στήλη των εικόνων απλώνει σε όλο το ύψος της σειράς (align-self: stretch) και μοιράζει τις
+   δύο εικόνες: η πρώτη στην κορυφή — ΕΥΘΥΓΡΑΜΜΙΣΜΕΝΗ με τον τίτλο «Πώς δουλεύω» — και η
+   δεύτερη στο τέλος, δίπλα στην κατακλείδα. */
+.about-media {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  align-self: stretch;
+}
+
+/* Ίδιος κάδρος με τη μεγάλη φωτογραφία (`.about-image`): 16px ακτίνα, ίδιο περίγραμμα, ίδια σκιά,
+   ίδιο διακοσμητικό ημικύκλιο. Χωρίς aspect-ratio: η εικόνα κρατά την αναλογία του αρχείου, άρα
+   κανένα cover-crop πάνω στη ζωγραφιά. */
+.about-art {
+  position: relative;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(107, 115, 99, 0.16);
+  box-shadow: 0 16px 40px var(--shadow-warm);
+  background: var(--card);
+}
+
+.about-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* (Το διακοσμητικό ημικύκλιο `.about-art::after` ΑΦΑΙΡΕΘΗΚΕ 18/10/2026: φαινόταν σαν κύκλος
+   κάτω-δεξιά πάνω στη ζωγραφιά, ενώ δεν υπάρχει στις πρωτότυπες εικόνες. Μένει μόνο στον κάδρο
+   της μεγάλης φωτογραφίας του About, όπου το ζήτησε ο ιδιοκτήτης.) */
+
+/* ── Οπτική ευθυγράμμιση της στήλης των εικόνων με το κείμενο (μετρημένο, όχι «με το μάτι») ──
+   ΠΑΝΩ: το κουτί του h3 ξεκινά στο ίδιο y με τον κάδρο, αλλά τα ΓΡΑΜΜΑΤΑ ξεκινούν 20px πιο κάτω
+   (28px γραμματοσειρά, line-height 44.8px). Χωρίς το offset η εικόνα «πατάει» 20px πιο πάνω από
+   το «Πώς δουλεύω» (μετρημένο σε screenshot 2x: κάδρος 131, μελάνι τίτλου 151).
+   ΚΑΤΩ: με `justify-content: space-between` η δεύτερη εικόνα σταματούσε στο κάτω άκρο της σειράς,
+   που είναι 12px πιο κάτω από το μελάνι της κατακλείδας «…μια μεγάλη διαφορά.» (1555.5 vs 1543.5). */
+.about-grid--how .about-media {
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+/* «Η δική μου προσέγγιση»: ίδια λογική — η εικόνα κάθεται 20px πιο κάτω ώστε το επάνω άκρο του
+   κάδρου να ευθυγραμμιστεί με τα ΓΡΑΜΜΑΤΑ του τίτλου (όχι με το αόρατο κουτί του h3), και ο
+   τίτλος δεν παίρνει το margin-top των 38px που δίνει το `.about-text h3:not(:first-child)`. */
+.about-grid--approach .about-art {
+  margin-top: 20px;
+  align-self: start;
+}
+
+.about-grid.about-grid--approach .about-text > h3 { margin-top: 0; }
+
+/* ΕΥΘΥΓΡΑΜΜΙΣΗ: το `.about-text h3:not(:first-child)` δίνει 38px margin-top στους υπόλοιπους
+   τίτλους (για απόσταση από την προηγούμενη υπο-ενότητα). Εδώ ο τίτλος είναι ο ΠΡΩΤΟΣ της στήλης
+   και το margin αυτό έσπρωχνε το κείμενο 38px πιο κάτω από την κορυφή της εικόνας (μετρημένο).
+   Τρεις κλάσεις επίτηδες: το `:not(:first-child)` έχει ίδια ειδικότητα και έρχεται ΑΡΓΟΤΕΡΑ στο
+   αρχείο, οπότε με δύο κλάσεις θα κέρδιζε εκείνο. */
+.about-grid.about-grid--how .about-text > h3 { margin-top: 0; }
+
+@media (max-width: 1199px) {
+  /* Στενότερα desktop (992–1199) το κείμενο είναι πολύ ψηλότερο από τις δύο εικόνες μαζί
+     (μετρημένο 1024: κείμενο 1782px, εικόνες 576+576) — το `space-between` άφηνε 630px κενό
+     ανάμεσά τους. Εκεί οι δύο εικόνες μένουν μαζί στην κορυφή, ευθυγραμμισμένες με τον τίτλο. */
+  .about-media { justify-content: flex-start; }
+}
+
+@media (max-width: 991px) {
+  /* Μία στήλη: οι δύο εικόνες πάνω από το κείμενο, με σταθερό κενό (το space-between θα άνοιγε
+     τρύπα ύψους σειράς). Χωρίς το offset των 20px — εδώ η εικόνα δεν είναι δίπλα στον τίτλο. */
+  .about-media { justify-content: flex-start; gap: 20px; }
+  .about-grid--how .about-media { margin-top: 0; }
+}
+
+/* Εικόνες ΔΙΠΛΑ στις υπο-ενότητες («Σπουδές & Επαγγελματική Εμπειρία», «Πώς δουλεύω») —
+   ζητήθηκαν 18/10/2026.
+   ΓΙΑΤΙ GRID ΚΑΙ ΟΧΙ FLOAT: δοκιμάστηκε float:left πρώτα και απορρίφθηκε με μέτρηση/μάτι — οι
+   τελευταίες γραμμές κάθε παραγράφου «πηδούσαν» κάτω από την εικόνα (η παράγραφος «έσπαγε» σε
+   δύο κολόνες με τη 2η γραμμή στο αριστερό άκρο) και οι λίστες του «Σπουδές» έβγαζαν κενές
+   κουκκίδες + ορφανές γραμμές τυλιγμένες γύρω από το float. Το grid δίνει σταθερό «εικόνα |
+   αρχικό κείμενο» δίστιχο και η συνέχεια (λίστες, βήματα) πάει καθαρή σε όλο το πλάτος. */
+.about-pair {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin: 8px 0 20px;
+}
+
+.about-figure { margin: 0; }
+
+.about-figure picture,
+.about-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-figure img {
+  border-radius: 16px;
+  border: 1px solid var(--sage-line);
+  background: var(--card);
+  box-shadow: 0 14px 30px var(--shadow-warm);
+}
+
+/* Κυκλικό πορτρέτο: δακτύλιος στο ΙΔΙΟ χρώμα με τον τίτλο «Σπουδές & Επαγγελματική Εμπειρία»
+   (ζητήθηκε 18/10/2026) — δηλαδή το --sage-dark των h3, όχι το ανοιχτό περίγραμμα. */
+.about-figure--round img {
+  border-radius: 50%;
+  border: 5px solid var(--sage-dark);
+  box-shadow: 0 14px 30px var(--shadow-warm);
+}
+
+/* (Το `.about-figure--soft` αφαιρέθηκε 18/10/2026: η εικονογράφηση του «Πώς δουλεύω» μετακόμισε
+   στο δικό της δίστιχο ως `.about-image--art`, με την ίδια μεταχείριση με τη μεγάλη φωτογραφία.) */
+
+/* Οι παράγραφοι μέσα στο δίστιχο δεν χρειάζονται το κατώτερο κενό τους (το δίνει το .about-pair). */
+.about-pair p:last-child { margin-bottom: 0; }
+
+/* Κάτω από 1100px η στήλη κειμένου του About στενεύει (462px στα 1024) και δίπλα σε εικόνα θα
+   έμεναν ~200px γραμμές — μη αναγνώσιμο. Εκεί το δίστιχο «σπάει» σε εικόνα πάνω / κείμενο κάτω. */
+@media (max-width: 1100px) {
+  .about-pair {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .about-pair .about-figure {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
+
 /* Οι δύο υπο-ενότητες του «Σχετικά με Εμένα» (Σπουδές / Μέθοδοι) — χρειάζονται ανάσα από
    πάνω, αλλιώς κολλάνε στην προηγούμενη παράγραφο. */
 .about-text h3:not(:first-child) {
@@ -841,32 +1109,9 @@ nav {
   background: var(--sage);
 }
 
-.about-highlights {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 30px;
-}
-
-.highlight-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: rgba(255,255,255,0.45);
-  border-radius: 10px;
-  border: 1px solid rgba(107,115,99,0.16);
-}
-
-.highlight-item .icon {
-  color: var(--primary);
-  font-size: 20px;
-}
-
-.highlight-item span {
-  font-size: 14px;
-  color: var(--text-light);
-}
+/* (Τα .about-highlights / .highlight-item αφαιρέθηκαν 18/10/2026 — τα 4 εικονίδια «Παιδιά /
+   Ενήλικες / Συνεδρίες κατ' οίκον / Ελληνικά & Αγγλικά» ζήτησε ο ιδιοκτήτης να φύγουν μαζί με το
+   «Λογοθεραπεία με επίκεντρο τον άνθρωπο».) */
 
 /* ---------- Services ---------- */
 .services-grid {
@@ -1081,12 +1326,22 @@ nav {
 }
 
 /* ---------- FAQ ---------- */
+/* 8 κάρτες (18/10/2026): με 3 στήλες η τελευταία σειρά έμενε με 2 κουτάκια και φαινόταν
+   άνιση. Δύο στήλες x 4 σειρές = πλήρως ομοιόμορφο πλέγμα, και τα μεγαλύτερα κείμενα
+   αναπνέουν (με 3 στήλες οι κάρτες ψήλωναν υπερβολικά). */
 .faq-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  max-width: 1100px;
+  max-width: 1000px;
   margin: 0 auto;
+  align-items: stretch;
+}
+
+@media (max-width: 767px) {
+  .faq-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .faq-item {
@@ -1114,6 +1369,37 @@ nav {
   color: var(--text-muted);
   font-size: 14px;
   line-height: 1.8;
+}
+
+/* Οι απαντήσεις είναι πλέον δύο παράγραφοι — χρειάζεται ανάσα ανάμεσά τους. */
+.faq-item p + p {
+  margin-top: 10px;
+}
+
+/* Περιοχές κάλυψης μέσα στην κάρτα FAQ: ετικέτες (chips) αντί για πρόζα, ώστε η λίστα να
+   διαβάζεται με μια ματιά — ζητήθηκε 18/10/2026 («ευανάγνωστο και όμορφο με τις περιοχές»). */
+.faq-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+}
+
+.faq-areas li {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--sage-dark);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(107,115,99,0.28);
+  border-radius: 999px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+.faq-areas + p {
+  margin-top: 0;
 }
 
 /* ---------- License block (About) ---------- */
@@ -1325,6 +1611,18 @@ nav {
   margin-top: 16px;
 }
 
+/* Τίτλος της σημείωσης απορρήτου κάτω από τη φόρμα («Προστασία προσωπικών δεδομένων»),
+   στο ύφος των μικρών labels της σελίδας — 18/10/2026. */
+.form-note-title {
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--sage-dark);
+  margin: 24px 0 6px;
+}
+
 .direct-email a {
   color: var(--primary);
   font-weight: 600;
@@ -1395,10 +1693,38 @@ footer {
 }
 
 .footer-about .footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* 8px: ίδιο σκεπτικό με το header logo — η italic Literata έχει ουρές που βγαίνουν κάτω
+     από το line box, άρα το box-gap πρέπει να είναι μεγαλύτερο από το επιθυμητό κενό μελάνης. */
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* Το ίδιο «ζευγάρι» με το logo του header: Literata italic τερρακότας + Mulish caps sage. */
+.footer-about .footer-logo .f-name {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--terracotta);
+}
+
+.footer-about .footer-logo .f-role {
+  display: block;
+  /* Το «ανάσα» πάει στο margin, όχι στο flex gap: το .f-name/.f-role είναι block μέσα στο ίδιο
+     .lang-el span, άρα το `gap` του .footer-logo δεν τα αγγίζει (μετρήθηκε box-gap 0).
+     10px = 3.75px πραγματικό κενό μελάνης (8px έδινε 1.75px, πολύ σφιχτό δίπλα στο «ρ»). */
+  margin-top: 10px;
   font-family: var(--font-heading);
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--primary);
 }
 
 .footer-about p {
@@ -1447,6 +1773,65 @@ footer {
 
 .footer-bottom a {
   color: var(--primary);
+}
+
+/* ---------- Back to top (τέλος σελίδας) ---------- */
+.back-to-top-wrap {
+  text-align: center;
+  margin-top: 18px;
+  padding: 0 0 60px;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(107, 115, 99, 0.35);
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--sage-dark);
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+
+.back-to-top i {
+  font-size: 13px;
+  transition: transform var(--transition);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--sage-dark);
+  border-color: var(--sage-dark);
+  color: #fff;
+}
+
+.back-to-top:hover i,
+.back-to-top:focus-visible i {
+  transform: translateY(-2px);
+}
+
+/* Στο κινητό η σταθερή μπάρα κλήσης καλύπτει τον πάτο: το κουμπί παίρνει επιπλέον αέρα από
+   κάτω για να μη «κολλήσει» πάνω της. */
+@media (max-width: 991px) {
+  .back-to-top-wrap {
+    padding: 4px 0 44px;
+  }
+
+  .back-to-top {
+    padding: 13px 22px;
+    font-size: 13.5px;
+  }
+}
+
+body.has-consent .back-to-top-wrap {
+  padding-bottom: 104px;
 }
 
 /* ---------- Personal sign-off ---------- */
@@ -1870,10 +2255,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .about-highlights {
-    grid-template-columns: 1fr;
-  }
-
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -1892,7 +2273,6 @@ footer {
    language flag, so reclaim it from the logo type and the side padding instead
    of shrinking the logo icon (that would make the 84px header shorter). */
 @media (max-width: 340px) {
-  .logo-text .name { font-size: 19px; }
   header .container { padding-left: 12px; padding-right: 12px; }
 
   /* 250px min-height + aspect-ratio 4/3 computed a 333px-wide box inside a 280px
@@ -1904,8 +2284,12 @@ footer {
 }
 
 /* ---------- Language visibility ---------- */
-[data-lang="el"] .lang-en { display: none; }
-[data-lang="en"] .lang-el { display: none; }
+/* `!important` επίτηδες: το κρύψιμο της άλλης γλώσσας πρέπει να κερδίζει ΠΑΝΤΑ. Χωρίς αυτό, μια
+   τοπική ρύθμιση με ίδια ειδικότητα που έρχεται αργότερα (π.χ. το `.policy .back { display:
+   inline-block }` στο <style> του privacy.html) εμφάνιζε ΚΑΙ τις δύο γλώσσες — το «Επιστροφή στην
+   αρχική» δίπλα στο «Back to home» (bug 18/10/2026). Το !important εδώ μόνο κρύβει. */
+[data-lang="el"] .lang-en { display: none !important; }
+[data-lang="en"] .lang-el { display: none !important; }
 
 /* ---------- Animations ---------- */
 @keyframes fadeInUp {

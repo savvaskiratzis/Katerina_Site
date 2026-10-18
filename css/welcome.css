@@ -97,9 +97,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Ο χώρος κάτω ΔΕΝ είναι αισθητική επιλογή: το cookie bar είναι fixed και ~180-250px ψηλό,
-     και χωρίς αυτό το απόθεμα έκοβε τη γραμμή με τα 4 εικονίδια στο κάτω μέρος της εικόνας. */
-  padding: 14px 14px clamp(150px, 21svh, 210px);
+  /* Συμμετρικό padding: η εικόνα κάθεται στο ΚΕΝΤΡΟ της οθόνης. Πριν, το μεγάλο κάτω απόθεμα
+     (για το cookie bar) την έσπρωχνε ψηλά και «ακουμπούσε» πάνω — ζητήθηκε 18/10/2026.
+     Ο χώρος για το cookie bar κρατιέται πλέον από το ύψος της ίδιας της εικόνας (βλ.
+     .welcome-window) και μόνο όσο δεν έχει δοθεί συγκατάθεση. */
+  padding: clamp(18px, 3.4svh, 40px);
   background: rgba(59, 58, 51, 0.62);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
@@ -121,7 +123,9 @@
 .welcome-window {
   position: relative;
   line-height: 0;
-  width: min(94vw, calc(88svh * 1.4994));
+  /* Ύψος = όσο χωράει ανάμεσα στο συμμετρικό padding. Με `body:not(.has-consent)` (πιο κάτω)
+     μικραίνει κι άλλο ώστε το cookie bar να μην καλύπτει το κάτω μέρος της εικόνας. */
+  width: min(94vw, calc((100svh - 2 * clamp(18px, 3.4svh, 40px)) * 1.4994));
   aspect-ratio: 2528 / 1686;
   /* Χωρίς border-radius/overflow-hidden: κανένα pixel της εικόνας δεν κόβεται. */
   box-shadow: 0 26px 70px rgba(40, 32, 24, 0.42);
@@ -130,6 +134,20 @@
 
 .welcome-window:focus {
   outline: none;                 /* το ίδιο το παράθυρο δέχεται focus, όχι το ζωγραφισμένο κουμπί */
+}
+
+/* Πριν δοθεί συγκατάθεση cookies, το fixed cookie bar (181px desktop / 264px κινητό) μπορεί να
+   κρύψει το κάτω μέρος της εικόνας. Δεν ξαναγυρνάμε στο ασύμμετρο padding (αυτό την «κολλούσε»
+   πάνω): μικραίνουμε την εικόνα από ΟΛΕΣ τις μεριές, κρατώντας την κεντραρισμένη, τόσο ώστε το
+   bar να καλύπτει ελάχιστο (μετρήθηκε ≤40px desktop, ≤70px κινητό). */
+body:not(.has-consent) .welcome-window {
+  width: min(94vw, calc((100svh - 2 * clamp(18px, 3.4svh, 40px) - 2 * clamp(90px, 15svh, 150px)) * 1.4994));
+}
+
+@media (max-width: 560px) {
+  body:not(.has-consent) .welcome-window {
+    width: min(94vw, calc((100svh - 24px - 2 * clamp(120px, 22svh, 220px)) * 1.4994));
+  }
 }
 
 .welcome-img {
@@ -158,42 +176,12 @@
   box-shadow: 0 0 0 6px rgba(107, 115, 99, 0.55);
 }
 
-.welcome-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 253, 249, 0.88);
-  color: var(--ink);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(40, 32, 24, 0.28);
-  transition: background var(--transition), transform var(--transition);
-}
-
-.welcome-close:hover,
-.welcome-close:focus-visible {
-  background: #fff;
-  transform: scale(1.06);
-}
-
 @media (max-width: 480px) {
-  .welcome-overlay { padding: 8px; }
-  .welcome-close { top: 6px; right: 6px; width: 36px; height: 36px; font-size: 21px; }
+  .welcome-overlay { padding: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .welcome-overlay { transition: none; }
-  .welcome-close { transition: none; }
-  .welcome-close:hover { transform: none; }
 }
 
 /* ===========================================================================
