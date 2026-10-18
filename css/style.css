@@ -1025,6 +1025,11 @@ nav {
   .about-grid--how .about-art--mobile-only {
     display: block;
     margin: 26px 0 10px;
+    /* Στα tablet (600-991px) το artwork σε πλήρες πλάτος γινόταν 1.150px ψηλό και «έπνιγε» τη
+       σελίδα. Περιορίζεται στα 520px και κεντράρεται· στο κινητό (≤520px) δεν αλλάζει τίποτα. */
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
