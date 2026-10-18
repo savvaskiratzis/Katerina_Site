@@ -1016,7 +1016,19 @@ nav {
      τρύπα ύψους σειράς). Χωρίς το offset των 20px — εδώ η εικόνα δεν είναι δίπλα στον τίτλο. */
   .about-media { justify-content: flex-start; gap: 20px; }
   .about-grid--how .about-media { margin-top: 0; }
+
+  /* «Πώς δουλεύω»: στο κινητό το «αποτύπωμα αξιών» φεύγει από τη στήλη των εικόνων και μπαίνει
+     ΜΕΣΑ στο κείμενο, μετά την «Όταν χρειάζεται…» και πριν το «Ο στόχος μας;» (ζήτηση
+     18/10/2026). Μόνο desktop-έκδοση στη στήλη, μόνο mobile-έκδοση στο κείμενο. */
+  .about-grid--how .about-art--desktop-only { display: none; }
+
+  .about-grid--how .about-art--mobile-only {
+    display: block;
+    margin: 26px 0 10px;
+  }
 }
+
+.about-art--mobile-only { display: none; }   /* desktop/tablet: κερδίζει το παραπάνω @media */
 
 /* Εικόνες ΔΙΠΛΑ στις υπο-ενότητες («Σπουδές & Επαγγελματική Εμπειρία», «Πώς δουλεύω») —
    ζητήθηκαν 18/10/2026.

@@ -64,7 +64,7 @@
        bytes, outlines untouched so rendering is identical.
        Regenerate after adding an icon, then re-run the pixel gate. -->
   <link rel="stylesheet" href="vendor/font-awesome/6.5.1/subset/fa-subset.css?v=796f26e2">
-  <link rel="stylesheet" href="css/style.css?v=7473fd48">
+  <link rel="stylesheet" href="css/style.css?v=67019ace">
   <!-- The welcome screen's own stylesheet: separate so this large, self-contained feature
        can be edited without touching the 1,700-line site sheet. tools/version-assets.py
        rewrites BOTH ?v= tokens from the files' content hashes — a stale token means
@@ -713,7 +713,7 @@
                συνεργασία ξεκινά από τις ανάγκες του) και κάτω το «αποτύπωμα αξιών» (δένει με τα
                βήματα/στόχο: εξατομίκευση, συνεργασία, εξέλιξη, καθημερινότητα).
                Επεξεργασία/πηγές: tools/build-about-inline.py. -->
-          <figure class="about-art fade-in">
+          <figure class="about-art about-art--circle fade-in">
             <picture>
               <source srcset="images/tsiga-family-circle-760.webp" type="image/webp">
               <img src="images/tsiga-family-circle-760.jpg"
@@ -721,7 +721,7 @@
                    width="760" height="755" loading="lazy" decoding="async">
             </picture>
           </figure>
-          <figure class="about-art fade-in">
+          <figure class="about-art about-art--fingerprint about-art--desktop-only fade-in">
             <picture>
               <source srcset="images/tsiga-values-fingerprint-760.webp" type="image/webp">
               <img src="images/tsiga-values-fingerprint-760.jpg"
@@ -872,14 +872,28 @@
             Όταν χρειάζεται, συνεργαζόμαστε με άλλους επαγγελματίες που υποστηρίζουν το παιδί, ώστε
             να υπάρχει όσο το δυνατόν πιο ολοκληρωμένη προσέγγιση.
           </p>
+          <!-- ΚΙΝΗΤΟ ΜΟΝΟ (≤991px): το ίδιο artwork ΜΕΣΑ στη ροή του κειμένου — ζητήθηκε
+               18/10/2026 («ανάμεσα στο “Όταν χρειάζεται…” και στο “Ο στόχος μας;”»). Υπάρχει
+               δεύτερο αντίγραφο γιατί η στήλη εικόνων είναι άλλο κουτί· έτσι το κείμενο μένει
+               block και τα margins του δεν αλλάζουν ρυθμό (σε flex/grid δεν «πέφτουν»).
+               Μόνο η μία εκδοχή εμφανίζεται ανά breakpoint (η άλλη display:none). -->
+          <figure class="about-art about-art--fingerprint about-art--mobile-only fade-in">
+            <picture>
+              <source srcset="images/tsiga-values-fingerprint-760.webp" type="image/webp">
+              <img src="images/tsiga-values-fingerprint-760.jpg"
+                   alt="Σεβασμός στη μοναδικότητα κάθε ανθρώπου"
+                   width="760" height="1107" loading="lazy" decoding="async">
+            </picture>
+          </figure>
+
 
           <p class="lang-en">
             When needed, we work together with other professionals who support the child, so that
             the approach is as complete as possible.
           </p>
 
-          <h4 class="lang-el">Ο στόχος μας;</h4>
-          <h4 class="lang-en">Our goal?</h4>
+          <h4 class="lang-el about-goal">Ο στόχος μας;</h4>
+          <h4 class="lang-en about-goal">Our goal?</h4>
           <p class="lang-el">
             Να μπορεί το παιδί να επικοινωνεί με μεγαλύτερη ευκολία, αυτοπεποίθηση και χαρά,
             αξιοποιώντας τις δεξιότητές του στην καθημερινή ζωή.
