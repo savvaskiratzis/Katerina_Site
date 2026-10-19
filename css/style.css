@@ -192,19 +192,25 @@
   --font-display: 'Literata', 'Literata Fallback', Georgia, 'Times New Roman', serif;
 }
 
-/* Metric-matched fallbacks (18/9/2026).
+/* Metric-matched fallbacks (18/9/2026, size-adjust διορθώθηκε 19/10/2026).
    The webfonts are deliberately NOT preloaded (measured: 60 KB at high priority pushed LCP), so
    they swap in after the first paint. On the fixed, bottom-anchored cookie bar that swap grew the
    bar by 27 px and moved it upward -- Lighthouse attributed CLS 0.235 to #cookieBar alone.
    These faces let the fallback occupy the same space, so the swap moves nothing.
-   The values come from canvas measurements of both fonts (glyph width + font bounding box, per
-   100px em); ascent/descent-override pin the line box regardless of which local font is used. */
+
+   ⚠️ ΓΙΑΤΙ ΞΑΝΑΓΡΑΦΤΗΚΑΝ: το size-adjust είχε μπει ανάποδα (π.χ. 106.8% για το Open Sans) —
+   έτσι το fallback γινόταν ~7% ΠΙΟ ΦΑΡΔΥ από την πραγματική γραμματοσειρά, τύλιγε μία γραμμή
+   παραπάνω και το cookie bar «κουνιόταν» 17px στο swap (μετρημένο: CLS 0.10-0.23 στο κινητό).
+   Το σωστό νούμερο είναι web/fallback (πόσο ΠΡΕΠΕΙ να σμικρυνθεί το fallback), υπολογισμένο από
+   τα πραγματικά πλάτη γλυφών (fontTools) πάνω στο κείμενο της σελίδας, όχι από το αντίστροφο.
+   Και λείπανε εντελώς τα Literata Fallback που ζητά το --font-display, που σημαίνει ότι τα
+   μεγάλα τυπογραφικά (display) άλλαζαν μέτρα στο swap χωρίς κανέναν περιορισμό. */
 @font-face {
   font-family: 'Open Sans Fallback';
   src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('Liberation Sans'), local('DejaVu Sans');
-  size-adjust: 106.8%;
-  ascent-override: 100.2%;
-  descent-override: 27.2%;
+  size-adjust: 93.6%;
+  ascent-override: 106.9%;
+  descent-override: 29.3%;
   line-gap-override: 0%;
   font-display: swap;
 }
@@ -212,9 +218,21 @@
 @font-face {
   font-family: 'Mulish Fallback';
   src: local('Arial'), local('Helvetica Neue'), local('Helvetica'), local('Liberation Sans'), local('DejaVu Sans');
-  size-adjust: 93.9%;
-  ascent-override: 107.5%;
-  descent-override: 26.6%;
+  size-adjust: 89.7%;
+  ascent-override: 100.5%;
+  descent-override: 25.0%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
+
+/* Το serif fallback των display κειμένων (Literata). Ίδια λογική: πλάτη από τα tables του
+   literata-*.woff2 συγκριμένα με Liberation/DejaVu Serif, ώστε το swap να μη σπάει γραμμές. */
+@font-face {
+  font-family: 'Literata Fallback';
+  src: local('Times New Roman'), local('Liberation Serif'), local('DejaVu Serif'), local('Georgia');
+  size-adjust: 93.7%;
+  ascent-override: 117.7%;
+  descent-override: 30.8%;
   line-gap-override: 0%;
   font-display: swap;
 }

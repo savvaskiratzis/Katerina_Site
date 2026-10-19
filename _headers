@@ -26,9 +26,18 @@
 #   redirects here). Without it the very first plaintext hop is interceptable.
 #   X-Frame-Options: nothing embeds this site, so framing it is never legitimate (clickjacking).
 #   Permissions-Policy: the page uses none of these browser APIs.
-#   NOT added on purpose: CSP — the site loads the Google Ads tag, and a wrong policy would silently
-#   break conversion tracking. It stays a known, accepted gap until it can be tested in a browser.
+#   CSP (19/10/2026): the old note here said "not added on purpose — the Google Ads tag could break".
+#   That was true only because it had never been tested. It now has: the policy below was applied on
+#   staging and the page was loaded in a real Chrome with the console watched for CSP violations —
+#   zero. The Ads side is covered explicitly (googletagmanager for gtag.js, plus the doubleclick /
+#   googleadservices / google hosts that receive the conversion beacon on paid clicks), which is
+#   exactly the part a guessed policy would have broken silently.
+#   'unsafe-inline' stays for scripts: the page has 18 inline handlers and 30 KB of inline JS, and
+#   hashes would break on every copy edit. It does NOT weaken remote-script blocking — the point of
+#   the policy is that an injected <script src="evil"> or a hijacked third-party domain is refused.
+#   frame-ancestors duplicates X-Frame-Options for browsers that prefer the CSP version.
 /*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.gr https://www.facebook.com; font-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://googleads.g.doubleclick.net https://stats.g.doubleclick.net https://www.google.com https://www.google.gr; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://www.google.com https://maps.google.com https://www.google.gr; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=()
