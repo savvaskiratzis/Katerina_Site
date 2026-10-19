@@ -64,7 +64,7 @@
        bytes, outlines untouched so rendering is identical.
        Regenerate after adding an icon, then re-run the pixel gate. -->
   <link rel="stylesheet" href="vendor/font-awesome/6.5.1/subset/fa-subset.css?v=796f26e2">
-  <link rel="stylesheet" href="css/style.css?v=aaf2e821">
+  <link rel="stylesheet" href="css/style.css?v=d8232c2a">
   <!-- The welcome screen's own stylesheet: separate so this large, self-contained feature
        can be edited without touching the 1,700-line site sheet. tools/version-assets.py
        rewrites BOTH ?v= tokens from the files' content hashes — a stale token means
@@ -1622,9 +1622,11 @@
        tracked: the generic tel: handler fires the Google Ads conversion. -->
   <div class="call-bar" id="callBar">
     <a href="tel:+306937524966" class="call-btn">
-      <i class="fas fa-phone-alt" aria-hidden="true"></i>
-      <span class="lang-el">Καλέστε τώρα · 693 752 4966</span>
-      <span class="lang-en">Call now · 693 752 4966</span>
+      <!-- ΧΩΡΙΣ εικονίδιο (ζήτηση ιδιοκτήτη 19/10/2026) και ΜΕ τον αριθμό στο label:
+           η μπάρα λέει πλέον μόνο «Ας Μιλήσουμε ! · 693 752 4966». Το κενό πριν το «!»
+           είναι δική του επιλογή — μη το «διορθώσεις» σε copy pass. -->
+      <span class="lang-el">Ας Μιλήσουμε ! · 693 752 4966</span>
+      <span class="lang-en">Let's talk! · 693 752 4966</span>
     </a>
   </div>
 

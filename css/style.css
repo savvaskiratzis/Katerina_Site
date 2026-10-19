@@ -2166,11 +2166,22 @@ body.has-consent .back-to-top-wrap {
     background: var(--primary);
     color: #fffdf9;                       /* 4.85:1 — ήταν var(--text-dark) = 2.32:1 μετά το retint.
                                              Το Lighthouse ΔΕΝ το έπιασε (media query + has-consent). */
-    font-family: var(--font-sans);
-    font-size: 15px;
-    font-weight: 700;
+    /* Γραμματοσειρά ΤΙΤΛΩΝ (Literata), ζήτηση ιδιοκτήτη 19/10/2026: η μπάρα να μιλάει την
+       ίδια γλώσσα με το «Ας Μιλήσουμε!» / «Καλώς ήρθατε!». Με Open Sans 600+tracking έμοιαζε
+       «ξένη» δίπλα τους — δοκιμάστηκε, απορρίφθηκε, γι' αυτό δεν είναι .btn-style.
+       16px: το Literata έχει μικρότερο οπτικό ύψος από το Open Sans στα ίδια px. */
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
     text-decoration: none;
     transition: all var(--transition);
+  }
+
+  /* Στα πολύ στενά (≤340px, π.χ. iPhone SE 1ης γενιάς / παλιά Android) το Literata στα 16px
+     δεν χωράει σε μία γραμμή: μετρημένο 256px κείμενο σε 256px πλάτος → αναδίπλωση σε 2 γραμμές
+     και μπάρα 79px αντί 54. Στα 14px πέφτει στα ~224px και χωράει άνετα. */
+  @media (max-width: 340px) {
+    body.has-consent .call-btn { font-size: 14px; }
   }
 
   body.has-consent .call-btn:hover,
