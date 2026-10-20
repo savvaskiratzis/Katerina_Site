@@ -335,17 +335,10 @@ img {
   flex-wrap: wrap;
 }
 
-/* Κάθε στοιχείο (τηλέφωνο / email / διεύθυνση) είναι ένα ενιαίο «chip»: το εικονίδιο
-   κάθεται κατακόρυφα κεντραρισμένο με το κείμενο και το κείμενο ΔΕΝ σπάει ποτέ στη μέση.
-   Χωρίς αυτό, στο κινητό το «693 752 4966» γινόταν «693 752» / «4966» και η διεύθυνση
-   «Κριμαίας 64,» / «Γλυφάδα» με τη δεύτερη γραμμή κάτω από το εικονίδιο (μετρήθηκε 390px). */
 .top-bar .contact-info a {
   color: var(--text-muted);
   font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  white-space: nowrap;
+  white-space: nowrap;   /* ένας αριθμός / μια διεύθυνση δεν σπάει ποτέ στη μέση */
   transition: color var(--transition);
 }
 
@@ -367,6 +360,23 @@ img {
 .top-bar .social-icons a:hover {
   color: var(--primary);
   transform: translateY(-2px);
+}
+
+/* Desktop (≥992px): τα τρία στοιχεία επαφής απλώνουν σε όλο το πλάτος της μπάρας αντί να
+   στοιβάζονται αριστερά — «δεν μπορούν στο PC να είναι πιο αραιωμένα;» (20/10/2026).
+   Το τηλέφωνο μένει στην αριστερή άκρη, το email στη μέση, η διεύθυνση δεξιά· τα social
+   κρατούν σταθερή απόσταση 56px από τη διεύθυνση ώστε να μην «κολλάνε» πάνω της.
+   Το κινητό (≤767px) ΔΕΝ το αγγίζει αυτό: εκεί ισχύει το κεντραρισμένο stack. */
+@media (min-width: 992px) {
+  .top-bar .contact-info {
+    flex: 1 1 auto;
+    justify-content: space-between;
+  }
+
+  .top-bar .social-icons {
+    margin-left: 56px;
+    flex: 0 0 auto;
+  }
 }
 
 /* ---------- Header / Nav ---------- */
@@ -2341,6 +2351,12 @@ body.has-consent .back-to-top-wrap {
 
   .top-bar .contact-info a {
     font-size: 12.5px;
+    /* ΜΟΝΟ στο κινητό: κάθε στοιχείο γίνεται ένα «chip» (εικονίδιο κατακόρυφα κεντραρισμένο,
+       σταθερό κενό 7px). Στο desktop η μπάρα μένει όπως ήταν (inline, εικονίδιο στο baseline) —
+       το «σε PC δεν φαίνεται ωραία» του ιδιοκτήτη (20/10/2026) αφορούσε ακριβώς αυτό. */
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
   }
 
   .top-bar .social-icons {
