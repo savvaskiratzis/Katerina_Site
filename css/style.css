@@ -332,11 +332,20 @@ img {
   display: flex;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
+/* Κάθε στοιχείο (τηλέφωνο / email / διεύθυνση) είναι ένα ενιαίο «chip»: το εικονίδιο
+   κάθεται κατακόρυφα κεντραρισμένο με το κείμενο και το κείμενο ΔΕΝ σπάει ποτέ στη μέση.
+   Χωρίς αυτό, στο κινητό το «693 752 4966» γινόταν «693 752» / «4966» και η διεύθυνση
+   «Κριμαίας 64,» / «Γλυφάδα» με τη δεύτερη γραμμή κάτω από το εικονίδιο (μετρήθηκε 390px). */
 .top-bar .contact-info a {
   color: var(--text-muted);
   font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
   transition: color var(--transition);
 }
 
@@ -2312,12 +2321,29 @@ body.has-consent .back-to-top-wrap {
     grid-template-columns: 1fr;
   }
 
+  .top-bar {
+    padding: 9px 0;
+  }
+
   .top-bar .container {
     flex-direction: column;
     text-align: center;
+    gap: 9px;
   }
 
+  /* Στο κινητό τα τρία στοιχεία στοιβάζονται κεντραρισμένα σε 2-3 γραμμές: ό,τι χωρά
+     στην ίδια γραμμή μένει μαζί (τηλέφωνο + email στα 360-390px), η διεύθυνση πάει
+     από κάτω, και τίποτα δεν κόβεται στη μέση (το nowrap είναι στον base κανόνα). */
   .top-bar .contact-info {
+    justify-content: center;
+    gap: 4px 18px;
+  }
+
+  .top-bar .contact-info a {
+    font-size: 12.5px;
+  }
+
+  .top-bar .social-icons {
     justify-content: center;
   }
 }
