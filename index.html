@@ -64,7 +64,7 @@
        bytes, outlines untouched so rendering is identical.
        Regenerate after adding an icon, then re-run the pixel gate. -->
   <link rel="stylesheet" href="vendor/font-awesome/6.5.1/subset/fa-subset.css?v=796f26e2">
-  <link rel="stylesheet" href="css/style.css?v=468a3521">
+  <link rel="stylesheet" href="css/style.css?v=63d53038">
   <!-- The welcome screen's own stylesheet: separate so this large, self-contained feature
        can be edited without touching the 1,700-line site sheet. tools/version-assets.py
        rewrites BOTH ?v= tokens from the files' content hashes — a stale token means
@@ -1716,6 +1716,128 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeMenu();
     });
+
+    // ---- Οριζόντιο rail σε Υπηρεσίες & Κριτικές (κινητό, ≤767px) ----
+    // Κάθε grid τυλίγεται σε .rail-wrap που κρατά τα βελάκια πάνω από τις άκρες του. Τα
+    // βελάκια δείχνουν ΜΟΝΟ προς την κατεύθυνση όπου υπάρχει ακόμη περιεχόμενο: δεξί στην
+    // αρχή, αριστερό αφού προχωρήσει ο χρήστης, κανένα στο τέλος. Σε tablet/desktop
+    // (grids) μένουν κρυμμένα και δεν πιάνουν χώρο.
+    const railMQ = window.matchMedia('(max-width: 767px)');
+    const RAIL_LABELS = {
+      services: { el: ['Προηγούμενη υπηρεσία', 'Επόμενη υπηρεσία'], en: ['Previous service', 'Next service'] },
+      testimonials: { el: ['Προηγούμενη κριτική', 'Επόμενη κριτική'], en: ['Previous review', 'Next review'] },
+      faq: { el: ['Προηγούμενη ερώτηση', 'Επόμενη ερώτηση'], en: ['Previous question', 'Next question'] }
+    };
+    const rails = [];
+
+    function railStep(grid) {
+      const first = grid.firstElementChild;
+      const cs = getComputedStyle(grid);
+      const gap = parseFloat(cs.columnGap || cs.gap) || 0;
+      return (first ? first.getBoundingClientRect().width : grid.clientWidth * 0.8) + gap;
+    }
+
+    function nudgeRail(r) {
+      // μία φορά ανά rail: όταν το βελάκι εμφανιστεί πρώτη φορά
+      if (r.nudged) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.nudged = true; return; }
+      const btn = !r.next.classList.contains('is-hidden') ? r.next
+                : (!r.prev.classList.contains('is-hidden') ? r.prev : null);
+      if (!btn) return;
+      r.nudged = true;
+      btn.classList.add('nudge');
+      btn.addEventListener('animationend', () => btn.classList.remove('nudge'), { once: true });
+    }
+
+    function updateRails() {
+      const on = railMQ.matches;
+      document.body.classList.toggle('rails-on', on);
+      const lang = document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'el';
+      rails.forEach(r => {
+        const wrap = r.prev.parentElement;
+        if (!on) {
+          r.prev.classList.add('is-hidden');
+          r.next.classList.add('is-hidden');
+          if (wrap) wrap.classList.remove('can-prev', 'can-next');
+          return;
+        }
+        const max = r.grid.scrollWidth - r.grid.clientWidth;
+        const x = r.grid.scrollLeft;
+        const canPrev = x > 4;
+        const canNext = max > 4 && x < max - 4;
+        r.prev.classList.toggle('is-hidden', !canPrev);
+        r.next.classList.toggle('is-hidden', !canNext);
+        if (wrap) {
+          wrap.classList.toggle('can-prev', canPrev);
+          wrap.classList.toggle('can-next', canNext);
+        }
+        const L = RAIL_LABELS[r.kind][lang];
+        r.prev.setAttribute('aria-label', L[0]);
+        r.next.setAttribute('aria-label', L[1]);
+        if (r.count) {
+          const total = r.grid.children.length;
+          const step = railStep(r.grid);
+          const idx = Math.min(total, Math.max(1, Math.round(x / step) + 1));
+          r.count.textContent = idx + ' / ' + total;
+          r.count.hidden = !(max > 4);
+        }
+      });
+    }
+
+    function setupRails() {
+      if (rails.length) return;
+      [['services', '.services-grid'], ['testimonials', '.testimonials-grid'], ['faq', '.faq-grid']].forEach(([id, sel]) => {
+        const sec = document.getElementById(id);
+        const grid = sec && sec.querySelector(sel);
+        if (!grid) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'rail-wrap';
+        grid.parentNode.insertBefore(wrap, grid);
+        wrap.appendChild(grid);
+        const make = (dir) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'rail-arrow rail-arrow--' + dir + ' is-hidden';
+          b.innerHTML = '<i class="fas fa-chevron-down" aria-hidden="true"></i>';
+          b.setAttribute('aria-label', dir === 'next' ? 'Επόμενο' : 'Προηγούμενο');
+          b.addEventListener('click', () => {
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            grid.scrollBy({ left: (dir === 'next' ? 1 : -1) * railStep(grid),
+                            behavior: reduce ? 'auto' : 'smooth' });
+          });
+          wrap.appendChild(b);
+          return b;
+        };
+        const rail = { kind: id, grid, prev: null, next: null, count: null };
+        rail.prev = make('prev');
+        rail.next = make('next');
+        const count = document.createElement('span');
+        count.className = 'rail-count';
+        count.setAttribute('aria-hidden', 'true');
+        wrap.appendChild(count);
+        rail.count = count;
+        rails.push(rail);
+        grid.addEventListener('scroll', updateRails, { passive: true });
+        // Το «σπρώξιμο» του βελακιού πρέπει να παίξει όταν το rail είναι ΟΡΑΤΟ, όχι στο load.
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+              if (e.isIntersecting) { nudgeRail(rail); io.disconnect(); }
+            });
+          }, { threshold: 0.35 });
+          io.observe(wrap);
+        }
+      });
+      updateRails();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateRails);
+    }
+
+    setupRails();
+    window.addEventListener('resize', updateRails);
+    window.addEventListener('orientationchange', () => setTimeout(updateRails, 250));
+    if (railMQ.addEventListener) railMQ.addEventListener('change', updateRails);
+    // Η αλλαγή γλώσσας αλλάζει το μήκος των καρτών -> ξαναϋπολογισμός των βελακιών.
+    new MutationObserver(updateRails).observe(document.documentElement, { attributes: true, attributeFilter: ['data-lang'] });
 
     // ---- Υπο-κουμπιά του «Σχετικά»: το anchor δεν πρέπει να «πηδήξει» ----
     // Τα 4 anchors (#about-intro/#approach/#studies/#how-i-work) ζουν ΜΕΣΑ σε .fade-in στοιχεία.

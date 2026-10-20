@@ -2539,3 +2539,208 @@ body.has-consent .back-to-top-wrap {
   .nav-menu > li:first-child { margin-top: auto; }
   .nav-menu > li:last-child { margin-bottom: auto; }
 }
+
+/* ---------- Οριζόντιο rail: Υπηρεσίες & Κριτικές (κινητό) ----------
+   Οι κάρτες γίνονται οριζόντια λωρίδα με snap και «μισοφέγγαρο» peek της επόμενης, ώστε να
+   φαίνεται ότι συνεχίζει. Τα βελάκια εμφανίζονται ΜΟΝΟ όταν υπάρχει περιεχόμενο προς εκείνη
+   την κατεύθυνση (JS: body.rails-on + .is-hidden), με fade/scale για να μη «πετάγονται».
+   Εφαρμόζεται μόνο ≤767px· σε tablet/desktop τα grids μένουν όπως είναι. */
+.rail-wrap {
+  position: relative;
+}
+
+/* Απαλό «σβήσιμο» στην άκρη όπου συνεχίζει το rail: η κομμένη κάρτα δεν κόβεται απότομα
+   στο όριο της οθόνης και το βελάκι κάθεται πάνω στο gradient, όχι πάνω σε γράμματα.
+   Εμφανίζεται/σβήνει με την ίδια λογική θέσης (can-prev / can-next) όπως τα βελάκια. */
+.rail-wrap::before,
+.rail-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 86px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.26s ease;
+}
+
+.rail-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--paper) 20%, rgba(253, 244, 236, 0));
+}
+
+.rail-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--paper) 20%, rgba(253, 244, 236, 0));
+}
+
+body.rails-on .rail-wrap.can-prev::before,
+body.rails-on .rail-wrap.can-next::after {
+  opacity: 1;
+}
+
+.rail-arrow {
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(253, 244, 236, 0.55);
+  border-radius: 50%;
+  /* Συμπαγές sage με εικονίδιο στο χρώμα του χαρτιού: το κυκλάκι ξεχωρίζει από την κάρτα με
+     4.72:1 (πριν ήταν 1.04:1 — cream πάνω σε cream, δηλαδή αόρατο ως σχήμα). Ο λεπτός
+     «δακτύλιος» χαρτιού γύρω του το αποκολλάει και από την άκρη της κάρτας. */
+  background: var(--sage);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: var(--paper);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 3;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 3px rgba(253, 244, 236, 0.9), 0 6px 18px rgba(122, 104, 86, 0.22);
+  transition: opacity 0.24s ease, transform 0.24s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.rail-arrow--prev { left: 2px; }
+.rail-arrow--next { right: 2px; }
+
+/* Αόρατη ζώνη αφής ~52px γύρω από το ορατό κυκλάκι (42px): το δάχτυλο δεν χρειάζεται
+   ακρίβεια, αλλά η όψη μένει μικρή και δεν πατάει γράμματα. */
+.rail-arrow::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+}
+
+.rail-arrow i {
+  transform: rotate(-90deg);      /* fa-chevron-down περιστρέφεται σε δεξί/αριστερό βελάκι */
+  transition: transform 0.24s ease;
+}
+
+.rail-arrow--prev i { transform: rotate(90deg); }
+
+.rail-arrow:hover,
+.rail-arrow:focus-visible {
+  background: var(--sage-dark);
+  box-shadow: 0 0 0 3px rgba(253, 244, 236, 0.95), 0 8px 22px rgba(122, 104, 86, 0.26);
+}
+
+.rail-arrow:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
+}
+
+.rail-arrow.is-hidden {
+  opacity: 0;
+  visibility: hidden;                 /* βγαίνει και από τη σειρά tab / screen readers */
+  transform: translateY(-50%) scale(0.88);
+  pointer-events: none;
+  transition: opacity 0.24s ease, transform 0.24s ease, visibility 0s linear 0.24s;
+}
+
+body.rails-on .rail-arrow {
+  display: flex;
+}
+
+/* Μετρητής θέσης («2 / 8») στη λωρίδα κάτω από τις κάρτες: απαντά «πόσο μένει», όχι μόνο
+   «υπάρχει κι άλλο». Μόνο αριθμοί -> δεν χρειάζεται μετάφραση. Διακοσμητικός για screen
+   readers (aria-hidden), αφού τα κουμπιά ανακοινώνουν ήδη την κατεύθυνση.
+   Κεντραρισμένος επίτηδες: στα δεξιά έπεφτε πάνω στο gradient της άκρης και «έσβηνε». */
+.rail-count {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  bottom: 3px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: var(--sage-dark);
+  opacity: 0;
+  transition: opacity 0.26s ease;
+  pointer-events: none;
+}
+
+body.rails-on .rail-count {
+  opacity: 1;
+}
+
+body.rails-on .rail-count[hidden] {
+  display: none;
+}
+
+/* Ένα απαλό «σπρώξιμο» μία φορά, όταν το rail εμφανιστεί για πρώτα: τραβά το μάτι στο βελάκι
+   χωρίς να γίνεται μόνιμο animation. Το translateY(-50%) είναι μέρος του transform γιατί το
+   βελάκι είναι κεντραρισμένο κατακόρυφα. */
+@keyframes railNudgeNext {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  45%      { transform: translateY(-50%) translateX(5px); }
+}
+
+@keyframes railNudgePrev {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  45%      { transform: translateY(-50%) translateX(-5px); }
+}
+
+.rail-arrow--next.nudge { animation: railNudgeNext 0.62s ease 2; }
+.rail-arrow--prev.nudge { animation: railNudgePrev 0.62s ease 2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-arrow--next.nudge,
+  .rail-arrow--prev.nudge { animation: none; }
+}
+
+@media (max-width: 767px) {
+  /* Το full-bleed το κρατά το wrap (όχι το scroller): έτσι τα βελάκια κάθονται στις άκρες της
+     ΟΘΟΝΗΣ (3px από την άκρη) και πάνω από το εσωτερικό padding των καρτών, όχι πάνω σε κείμενο.
+     Με το bleed στο scroller, το wrap έμενε 20px μέσα και τα βελάκια έπεφταν στα γράμματα. */
+  .rail-wrap {
+    margin: 0 -20px;
+  }
+
+  .services-grid,
+  .testimonials-grid,
+  .faq-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;          /* ίσιο κάτω άκρο: όλες οι κάρτες στο ύψος της ψηλότερης */
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    overscroll-behavior-x: contain;
+    margin: 0;
+    padding: 4px 20px 20px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .services-grid::-webkit-scrollbar,
+  .testimonials-grid::-webkit-scrollbar,
+  .faq-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .services-grid > *,
+  .testimonials-grid > *,
+  .faq-grid > * {
+    flex: 0 0 86%;                 /* peek ~14% της επόμενης κάρτας */
+    max-width: 360px;
+    scroll-snap-align: start;
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-arrow { transition: none; }
+}
