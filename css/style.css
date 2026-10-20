@@ -592,12 +592,22 @@ nav {
 /* Mobile menu toggle */
 .menu-toggle {
   display: none;
+  position: relative;         /* βάση για το Χ (::before/::after) όταν το μενού είναι ανοιχτό */
   background: none;
   border: none;
   color: var(--text-light);
   font-size: 28px;
   cursor: pointer;
   padding: 5px;
+}
+
+@keyframes menuRowIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu.open > li { animation: none !important; }
 }
 
 /* ---------- Hero ---------- */
@@ -2229,26 +2239,69 @@ body.has-consent .back-to-top-wrap {
     grid-template-columns: 1fr 1fr;
   }
 
+  /* ---- Full-screen mobile menu (≤991px) ----------------------------------
+     Το μενού γεμίζει την οθόνη κάτω από το sticky header αντί να είναι ένα
+     μικρό κουτί που κόβεται στη μέση («να γεμίζει τη σελίδα όταν το πατάς»,
+     20/10/2026). Είναι `position: absolute` μέσα στο header και ΟΧΙ fixed:
+     το `backdrop-filter` του header δημιουργεί containing block για fixed
+     παιδιά, οπότε ένα fixed panel θα είχε ύψος ~77px. Το ύψος το δίνει το JS
+     (--menu-h = innerHeight − κάτω άκρο header), γιατί στο scroll 0 το header
+     κάθεται 98px πιο κάτω (πάνω μπάρα) — ένα σταθερό calc θα ξεχείλιζε. */
   .nav-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--dark);
+    height: var(--menu-h, calc(100svh - 77px));
+    background: var(--paper);
     flex-direction: column;
-    padding: 20px;
-    border-bottom: 1px solid rgba(107,115,99,0.16);
-    /* Ασφάλεια: με το ένθετο «Σχετικά» το μενού ψήλωσε — σε κοντές οθόνες να κυλάει αντί να
-       κόβεται κάτω από το viewport. */
-    max-height: calc(100svh - 120px);
+    justify-content: space-between;   /* το φύλλο γεμίζει από πάνω ως κάτω στο κινητό */
+    padding: clamp(8px, 2.4vh, 22px) 22px calc(18px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 18px 40px var(--shadow-warm);
+    max-height: none;
     overflow-y: auto;
+    overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
 
   .nav-menu.open {
     display: flex;
   }
+
+  /* Οι σύνδεσμοι σε γραμματοσειρά τίτλων (Literata), με λεπτές διαχωριστικές
+     γραμμές ώστε η λίστα να διαβάζεται ως «φύλλο» και όχι ως στοίβα από links. */
+  .nav-menu > li {
+    border-bottom: 1px solid rgba(107,115,99,0.10);
+  }
+
+  .nav-menu > li:last-child {
+    border-bottom: none;
+  }
+
+  /* Κεντράρουν τη λίστα κάθετα όταν περισσεύει χώρος — ισχύει μόνο στο tablet (βλ. το
+     media query στο τέλος του αρχείου)· στο κινητό η λίστα απλώνει σε όλο το ύψος. */
+
+  .nav-menu > li > a {
+    display: block;
+    padding: 12px 0;
+    font-family: var(--font-display);
+    font-size: 19.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--ink);
+    background: none;
+  }
+
+  .nav-menu > li > a:hover,
+  .nav-menu > li > a:focus-visible,
+  .nav-menu > li > a.active {
+    background: none;
+    color: var(--terracotta);
+  }
+
+  /* Η υπογράμμιση ::after είναι για το desktop· στο φύλλο δεν έχει νόημα. */
+  .nav-menu li a::after { content: none; }
 
   /* Στο κινητό δεν υπάρχει hover: το «Σχετικά» γίνεται ομαδοποιημένος τίτλος με την ένθετη
      λίστα ΠΑΝΤΑ ορατή (ένα dropdown μέσα σε dropdown θα ήταν άχρηστο στο touch). */
@@ -2261,8 +2314,8 @@ body.has-consent .back-to-top-wrap {
     visibility: visible;
     min-width: 0;
     max-width: none;
-    padding: 0 0 4px 12px;
-    margin: 2px 0 6px;
+    padding: 0 0 6px 12px;
+    margin: 0 0 6px;
     background: transparent;
     border: none;
     border-left: 2px solid var(--sage-line);
@@ -2271,10 +2324,79 @@ body.has-consent .back-to-top-wrap {
   }
   .nav-menu li.has-sub:hover .nav-sub,
   .nav-menu li.has-sub:focus-within .nav-sub { transform: none; }
-  .nav-sub li a { padding: 7px 10px; font-size: 14px; }
+
+  .nav-sub li a {
+    display: block;
+    padding: 6px 8px;
+    font-size: 14.5px;
+    font-family: var(--font-sans);
+    line-height: 1.35;
+    color: var(--ink-muted);
+  }
+
+  .nav-sub li a:hover,
+  .nav-sub li a:focus-visible { color: var(--terracotta); background: none; }
+
+  /* Είσοδος των γραμμών με μικρή καθυστέρηση ανά στοιχείο (όχι σε reduced-motion). */
+  .nav-menu.open > li {
+    animation: menuRowIn 0.26s ease both;
+  }
+  .nav-menu.open > li:nth-child(1) { animation-delay: 0.02s; }
+  .nav-menu.open > li:nth-child(2) { animation-delay: 0.05s; }
+  .nav-menu.open > li:nth-child(3) { animation-delay: 0.08s; }
+  .nav-menu.open > li:nth-child(4) { animation-delay: 0.11s; }
+  .nav-menu.open > li:nth-child(5) { animation-delay: 0.14s; }
+  .nav-menu.open > li:nth-child(6) { animation-delay: 0.17s; }
+  .nav-menu.open > li:nth-child(7) { animation-delay: 0.20s; }
+
+  /* Κλειδώνει το scroll της σελίδας όσο το φύλλο είναι ανοιχτό. */
+  body.menu-open {
+    overflow: hidden;
+  }
+  body.menu-open .nav-menu {
+    touch-action: pan-y;
+  }
+
+  /* Το φύλλο γεμίζει την οθόνη: ενώ είναι ανοιχτό το header ανεβαίνει πάνω από την μπάρα
+     cookies (1100), που αλλιώς θα έκοβε τους τελευταίους συνδέσμους. Η ΜΠΑΡΑ ΚΛΗΣΗΣ μένει
+     ΟΡΑΤΗ από κάτω: το ύψος του φύλλου τελειώνει από πάνω της (--menu-h, JS) και εδώ
+     ανεβαίνει πάνω από το φύλλο για να είναι σίγουρα πατήσιμη. */
+  body.menu-open header {
+    z-index: 1200;
+  }
+
+  body.menu-open #callBar {
+    z-index: 1300;
+  }
 
   .menu-toggle {
     display: block;
+  }
+
+  /* Το εικονίδιο γίνεται Χ όσο το μενού είναι ανοιχτό. Δεν υπάρχει fa-times στο
+     subset της γραμματοσειράς εικονιδίων, οπότε το Χ σχεδιάζεται σε CSS. */
+  body.menu-open .menu-toggle i {
+    opacity: 0;
+  }
+
+  body.menu-open .menu-toggle::before,
+  body.menu-open .menu-toggle::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text-light);
+  }
+
+  body.menu-open .menu-toggle::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  body.menu-open .menu-toggle::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 
   /* Keep the toggle in the header but compact: one flag - the language you'd
@@ -2401,4 +2523,19 @@ body.has-consent .back-to-top-wrap {
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ---------- Tablet: φύλλο μενού (768–991px) ----------
+   Το tablet σε όρθια στάση έχει ~850px ελεύθερο ύψος, οπότε το space-between του κινητού
+   άνοιγε 84px κενά ανάμεσα στις γραμμές και η λίστα έδειχνε σκόρπια (μετρήθηκε 768×1024).
+   Εδώ το κενό μπαίνει με πλαφόν 20px και η λίστα κεντράρεται κατακόρυφα με auto margins —
+   που μηδενίζονται μόνα τους αν το περιεχόμενο δεν χωράει, ώστε να κυλάει αντί να κόβεται. */
+@media (min-width: 768px) and (max-width: 991px) {
+  .nav-menu {
+    justify-content: flex-start;
+    gap: clamp(8px, 1.8vh, 20px);
+  }
+
+  .nav-menu > li:first-child { margin-top: auto; }
+  .nav-menu > li:last-child { margin-bottom: auto; }
 }

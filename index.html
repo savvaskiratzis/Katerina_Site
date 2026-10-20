@@ -64,7 +64,7 @@
        bytes, outlines untouched so rendering is identical.
        Regenerate after adding an icon, then re-run the pixel gate. -->
   <link rel="stylesheet" href="vendor/font-awesome/6.5.1/subset/fa-subset.css?v=796f26e2">
-  <link rel="stylesheet" href="css/style.css?v=2d288709">
+  <link rel="stylesheet" href="css/style.css?v=468a3521">
   <!-- The welcome screen's own stylesheet: separate so this large, self-contained feature
        can be edited without touching the 1,700-line site sheet. tools/version-assets.py
        rewrites BOTH ?v= tokens from the files' content hashes — a stale token means
@@ -183,7 +183,7 @@
         </a>
       </div>
       <nav>
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="navMenu">
           <i class="fas fa-bars"></i>
         </button>
         <ul class="nav-menu" id="navMenu">
@@ -1663,18 +1663,59 @@
       if (chosenLang) switchLang(chosenLang);
     } catch (e) {}
 
-    // ---- Mobile Menu ----
-    let menuOpenY = null;
+    // ---- Mobile Menu (full-screen sheet, ≤991px) ----
+    // Το ύψος του φύλλου υπολογίζεται από το πραγματικό κάτω άκρο του header:
+    // στο scroll 0 το header κάθεται κάτω από την πάνω μπάρα (98px), οπότε ένα
+    // σταθερό calc(100svh - 77px) θα ξεχείλιζε έξω από την οθόνη.
+    let menuOpenedY = null;
+    let menuOpenedAt = 0;
+    // Ύψος της μπάρας κλήσης (fixed, κάτω): το φύλλο σταματά από πάνω της ώστε να μένει
+    // πατήσιμη — «η μπάρα κλήσης θέλω να φαίνεται» (20/10/2026).
+    function callBarHeight() {
+      const bar = document.getElementById('callBar');
+      if (!bar) return 0;
+      const cs = getComputedStyle(bar);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return 0;
+      const b = bar.getBoundingClientRect();
+      return b.height > 0 && b.bottom > window.innerHeight - 40 ? Math.round(b.height) : 0;
+    }
+    function sizeMenu() {
+      const menu = document.getElementById('navMenu');
+      const hdr = document.getElementById('header');
+      if (!menu || !hdr || !menu.classList.contains('open')) return;
+      // Στο scroll 0 το header κάθεται κάτω από την πάνω μπάρα (98px), οπότε το ελεύθερο
+      // ύψος μετριέται από το ΠΡΑΓΜΑΤΙΚΟ κάτω άκρο του· ενώ το μενού είναι ανοιχτό το
+      // header ανεβαίνει πάνω από την μπάρα cookies (βλ. CSS body.menu-open header).
+      const free = window.innerHeight - hdr.getBoundingClientRect().bottom - callBarHeight();
+      document.documentElement.style.setProperty('--menu-h', Math.max(120, Math.round(free)) + 'px');
+    }
+    function setMenu(open) {
+      const menu = document.getElementById('navMenu');
+      const btn = document.querySelector('.menu-toggle');
+      if (!menu) return;
+      menu.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) {
+        sizeMenu();
+        menuOpenedY = window.scrollY;
+        menuOpenedAt = (window.performance && performance.now) ? performance.now() : Date.now();
+      } else {
+        menuOpenedY = null;
+      }
+    }
     function toggleMenu() {
       const menu = document.getElementById('navMenu');
-      menu.classList.toggle('open');
-      // where the visitor stood when the dropdown opened
-      menuOpenY = menu.classList.contains('open') ? window.scrollY : null;
+      setMenu(!menu.classList.contains('open'));
     }
     function closeMenu() {
-      document.getElementById('navMenu').classList.remove('open');
-      menuOpenY = null;
+      setMenu(false);
     }
+    window.addEventListener('resize', sizeMenu);
+    window.addEventListener('orientationchange', sizeMenu);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMenu();
+    });
 
     // ---- Υπο-κουμπιά του «Σχετικά»: το anchor δεν πρέπει να «πηδήξει» ----
     // Τα 4 anchors (#about-intro/#approach/#studies/#how-i-work) ζουν ΜΕΣΑ σε .fade-in στοιχεία.
@@ -1695,9 +1736,13 @@
     // Opened the menu, didn't pick anything, kept scrolling -> close it.
     // The 24px threshold keeps a stray elastic/tap scroll from shutting it the
     // instant it opens, and closeMenu() is still called directly by nav links.
+    // Το πρώτο ~0.6s αγνοείται: ένα smooth scroll που ήταν ήδη σε εξέλιξη όταν άνοιξε το
+    // μενού (ή το iOS που μαζεύει τη μπάρα διεύθυνσης) έκλεινε το φύλλο αμέσως μόλις άνοιγε.
     window.addEventListener('scroll', () => {
-      if (menuOpenY === null) return;
-      if (Math.abs(window.scrollY - menuOpenY) > 24) closeMenu();
+      if (menuOpenedY === null) return;
+      const now = (window.performance && performance.now) ? performance.now() : Date.now();
+      if (now - menuOpenedAt < 600) return;
+      if (Math.abs(window.scrollY - menuOpenedY) > 24) closeMenu();
     }, { passive: true });
 
     // ---- Header scroll effect ----
